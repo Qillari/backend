@@ -2,12 +2,14 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import mercadopago
 from email.message import EmailMessage
+from email.mime.image import MIMEImage
 import ssl
 import smtplib
 import uuid
+import base64
 
 app=Flask(__name__)
-CORS(app, origins=['https://qillari.vercel.app/', 'https://qillari.vercel.app', 'https://www.qillari.vercel.app/', 'https://www.qillari.vercel.app' , 'https://qillari.vercel.app/checkout'])
+CORS(app, origins=['https://front-end-qillari.vercel.app/', 'https://front-end-qillari.vercel.app', 'https://www.front-end-qillari.vercel.app/', 'https://www.qillari.vercel.app' ])
 
 @app.after_request
 def after_request(response):
@@ -76,10 +78,72 @@ def checkout():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route('/yape', methods=['POST'])
+def yape_correo():
+    user = 'qillari120@gmail.com'
+    app_password = 'qxklxfydjijymdcf'
+
+    
+    carrito = request.json.get("carrito")
+    email = request.json.get("email")
+    street_name = request.json.get("street_name")
+    preciototal = request.json.get("preciototal")
+    telefono = request.json.get("telefono")
+    imagen = request.json.get("telefono")
+    image_data = base64.b64decode(imagen)
+    imagen_adjunta = MIMEImage(image_data, name="pago de yape")
+
+    subject_vendedor = 'Se realizó la compra'
+    subject_comprador = 'Realizate una compra'
+
+    items_comprados = "\n".join([f"Producto: {item.get('nombre')}, Precio: {item.get('price')}, Cantidad: {item.get('totalamount')}" for item in carrito])
+
+    # Primer correo
+    em1 = EmailMessage()
+    em1['From'] = user
+    em1['To'] = "qillari120@gmail.com"
+    em1['Subject'] = subject_vendedor
+    content1 = ("Nuevo comprador\n"
+            "Lo que ha comprado es:\n"
+            "{}\n"
+            "Su email es: {}\n"
+            "Su calle es: {}\n"
+            "su telefono es: {}\n"
+            "El precio total es: {}").format(items_comprados, email, telefono, street_name, preciototal)
+    em1.set_content(content1)
+    em1.attach(imagen_adjunta)
+
+    # Segundo correo
+    em2 = EmailMessage()
+    em2['From'] = user
+    em2['To'] = email
+    em2['Subject'] = subject_comprador
+    content2 = ("Su compra paso con exito\n"
+            "Lo que has comprado es:\n"
+            "{}\n"
+            "El precio total es: {}\n"
+            "Su producto llegara al dia siguiente, cualquier cosa contactenos por whatsapp o por este correo").format(items_comprados, preciototal)
+    em2.set_content(content2)
+
+    context = ssl.create_default_context()
+
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+        smtp.login(user, app_password)
+        smtp.sendmail("info@qillari.com", "qillari120@gmail.com", em1.as_string())
+        smtp.sendmail("info@qillari.com", email, em2.as_string())
+
+    smtp.quit()
+
+    return jsonify({
+        'success': True,
+        'message': 'Se enviaron los correos electrónicos'
+    })
+
+
 @app.route('/correo', methods=['POST'])
 def Correo():
-    user = 'correo01321@gmail.com'
-    app_password = 'fqhrnzgxfzfubacp'
+    user = 'qillari120@gmail.com'
+    app_password = 'qxklxfydjijymdcf'
     
     carrito = request.json.get("carrito")
     email = request.json.get("email")
@@ -132,8 +196,8 @@ def Correo():
 
 @app.route('/correo-newsletter', methods=['POST'])
 def correo_newsletter():
-    user = 'correo01321@gmail.com'
-    app_password = 'fqhrnzgxfzfubacp'
+    user = 'qillari120@gmail.com'
+    app_password = 'qxklxfydjijymdcf'
     email = request.json.get("email")
     subject = 'nuevo suscriptor'
 
