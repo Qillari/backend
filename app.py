@@ -80,16 +80,13 @@ def checkout():
 
 @app.route('/yape', methods=['POST'])
 def yape():
-    user = 'correo01321@gmail.com'
-    app_password = 'fqhrnzgxfzfubacp'
-
+    user = 'qillari120@gmail.com'
+    app_password = 'qxklxfydjijymdcf'
     
-    preciototal = request.json.get("preciototal")
     carrito = request.json.get("carrito")
     email = request.json.get("email")
     street_name = request.json.get("direccion")
-    telefono = request.json.get("telefono")
-    imagen = request.json.get("imagen_de_pago")
+    preciototal = request.json.get("preciototal")
 
     subject_vendedor = 'Se realizó la compra'
     subject_comprador = 'Realizate una compra'
@@ -102,12 +99,11 @@ def yape():
     em1['To'] = "qillari120@gmail.com"
     em1['Subject'] = subject_vendedor
     content1 = ("Nuevo comprador\n"
-            "Lo que ha comprado es:\n"
+            "Lo que has comprado es:\n"
             "{}\n"
             "Su email es: {}\n"
             "Su calle es: {}\n"
-            "su telefono es: {}\n"
-            "El precio total es: {}").format(items_comprados, email, telefono, street_name, preciototal)
+            "El precio total es: {}").format(items_comprados, email, street_name, preciototal)
     em1.set_content(content1)
 
     # Segundo correo
@@ -126,8 +122,8 @@ def yape():
 
     with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
         smtp.login(user, app_password)
-        smtp.sendmail("info@qillari.com", "qillari120@gmail.com", em1.as_string())
-        smtp.sendmail("info@qillari.com", email, em2.as_string())
+        smtp.sendmail(user, "qillari120@gmail.com", em1.as_string())
+        smtp.sendmail(user, email, em2.as_string())
 
     smtp.quit()
 
@@ -138,7 +134,7 @@ def yape():
 
 
 @app.route('/correo', methods=['POST'])
-def correo():
+def Correo():
     user = 'qillari120@gmail.com'
     app_password = 'qxklxfydjijymdcf'
     
