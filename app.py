@@ -90,7 +90,7 @@ def yape():
     street_name = request.json.get("direccion")
     telefono = request.json.get("telefono")
     imagen = request.json.get("imagen_de_pago")
-    image_data = base64.b64decode(imagen)
+    image_data = base64.b64decode(imagen.split(',')[1])
     imagen_adjunta = MIMEImage(image_data, name="pago de yape")
 
     subject_vendedor = 'Se realizó la compra'
