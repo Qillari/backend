@@ -131,8 +131,8 @@ def yape():
 
     with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
         smtp.login(user, app_password)
-        smtp.sendmail("info@qillari.com", "qillari120@gmail.com", em1.as_string())
-        smtp.sendmail("info@qillari.com", email, em2.as_string())
+        smtp.sendmail(user, "qillari120@gmail.com", em1.as_string())
+        smtp.sendmail(user, email, em2.as_string())
 
 
     return jsonify({
