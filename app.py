@@ -82,8 +82,8 @@ def checkout():
 
 @app.route('/yape', methods=['POST'])
 def yape():
-    user = 'correo'
-    app_password = 'clave'
+    user = 'qillari120@gmail.com'
+    app_password = 'qxklxfydjijymdcf'
 
     
     preciototal = request.json.get("preciototal")
