@@ -80,9 +80,10 @@ def checkout():
 
 @app.route('/yape', methods=['POST'])
 def yape_correo():
+    print("hola")
     user = 'qillari120@gmail.com'
     app_password = 'qxklxfydjijymdcf'
-
+    print("hola2")
     
     carrito = request.json.get("carrito")
     email = request.json.get("email")
@@ -111,7 +112,6 @@ def yape_correo():
             "su telefono es: {}\n"
             "El precio total es: {}").format(items_comprados, email, telefono, street_name, preciototal)
     em1.set_content(content1)
-    em1.attach(imagen_adjunta)
 
     # Segundo correo
     em2 = EmailMessage()
