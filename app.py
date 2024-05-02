@@ -79,9 +79,9 @@ def checkout():
         return jsonify({"error": str(e)}), 500
 
 @app.route('/yape', methods=['POST'])
-def yape_correo():
-    user = 'qillari120@gmail.com'
-    app_password = 'qxklxfydjijymdcf'
+def yape():
+    user = 'correo01321@gmail.com'
+    app_password = 'fqhrnzgxfzfubacp'
 
     
     preciototal = request.json.get("preciototal")
@@ -110,12 +110,24 @@ def yape_correo():
             "El precio total es: {}").format(items_comprados, email, telefono, street_name, preciototal)
     em1.set_content(content1)
 
+    # Segundo correo
+    em2 = EmailMessage()
+    em2['From'] = user
+    em2['To'] = email
+    em2['Subject'] = subject_comprador
+    content2 = ("Su compra paso con exito\n"
+            "Lo que has comprado es:\n"
+            "{}\n"
+            "El precio total es: {}\n"
+            "Su producto llegara al dia siguiente, cualquier cosa contactenos por whatsapp o por este correo").format(items_comprados, preciototal)
+    em2.set_content(content2)
 
     context = ssl.create_default_context()
 
     with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
         smtp.login(user, app_password)
-        smtp.sendmail(user, "qillari120@gmail.com", em1.as_string())
+        smtp.sendmail("info@qillari.com", "qillari120@gmail.com", em1.as_string())
+        smtp.sendmail("info@qillari.com", email, em2.as_string())
 
     smtp.quit()
 
@@ -126,7 +138,7 @@ def yape_correo():
 
 
 @app.route('/correo', methods=['POST'])
-def Correo():
+def correo():
     user = 'qillari120@gmail.com'
     app_password = 'qxklxfydjijymdcf'
     
