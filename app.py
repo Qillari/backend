@@ -96,7 +96,28 @@ def yape_correo():
 
     items_comprados = "\n".join([f"Producto: {item.get('nombre')}, Precio: {item.get('price')}, Cantidad: {item.get('totalamount')}" for item in carrito])
 
+    # Primer correo
+    em1 = EmailMessage()
+    em1['From'] = user
+    em1['To'] = "qillari120@gmail.com"
+    em1['Subject'] = subject_vendedor
+    content1 = ("Nuevo comprador\n"
+            "Lo que ha comprado es:\n"
+            "{}\n"
+            "Su email es: {}\n"
+            "Su calle es: {}\n"
+            "su telefono es: {}\n"
+            "El precio total es: {}").format(items_comprados, email, telefono, street_name, preciototal)
+    em1.set_content(content1)
 
+
+    context = ssl.create_default_context()
+
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+        smtp.login(user, app_password)
+        smtp.sendmail(user, "qillari120@gmail.com", em1.as_string())
+
+    smtp.quit()
 
     return jsonify({
         'success': True,
