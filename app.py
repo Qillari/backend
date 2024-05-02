@@ -84,14 +84,12 @@ def yape_correo():
     app_password = 'qxklxfydjijymdcf'
 
     
+    preciototal = request.json.get("preciototal")
     carrito = request.json.get("carrito")
     email = request.json.get("email")
     street_name = request.json.get("direccion")
-    preciototal = request.json.get("preciototal")
     telefono = request.json.get("telefono")
     imagen = request.json.get("imagen_de_pago")
-    image_data = base64.b64decode(imagen)
-    imagen_adjunta = MIMEImage(image_data, name="pago de yape")
 
     subject_vendedor = 'Se realizó la compra'
     subject_comprador = 'Realizate una compra'
@@ -111,7 +109,7 @@ def yape_correo():
             "su telefono es: {}\n"
             "El precio total es: {}").format(items_comprados, email, telefono, street_name, preciototal)
     em1.set_content(content1)
-    em1.attach(imagen_adjunta)
+
 
     # Segundo correo
     em2 = EmailMessage()
