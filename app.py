@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import mercadopago
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from email.message import EmailMessage
 from email.mime.image import MIMEImage
 import ssl
@@ -99,7 +101,7 @@ def yape():
     items_comprados = "\n".join([f"Producto: {item.get('nombre')}, Precio: {item.get('price')}, Cantidad: {item.get('totalamount')}" for item in carrito])
 
     # Primer correo
-    em1 = EmailMessage()
+    em1 = MIMEMultipart()
     em1['From'] = user
     em1['To'] = "qillari120@gmail.com"
     em1['Subject'] = subject_vendedor
@@ -111,6 +113,7 @@ def yape():
             "su telefono es: {}\n"
             "El precio total es: {}").format(items_comprados, email, telefono, street_name, preciototal)
     em1.set_content(content1)
+    em1.attach(MIMEText(content1, 'plain'))
     em1.attach(imagen_adjunta)
 
     # Segundo correo
