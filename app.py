@@ -86,10 +86,10 @@ def yape_correo():
     
     carrito = request.json.get("carrito")
     email = request.json.get("email")
-    street_name = request.json.get("street_name")
+    street_name = request.json.get("direccion")
     preciototal = request.json.get("preciototal")
     telefono = request.json.get("telefono")
-    imagen = request.json.get("telefono")
+    imagen = request.json.get("imagen_de_pago")
     image_data = base64.b64decode(imagen)
     imagen_adjunta = MIMEImage(image_data, name="pago de yape")
 
