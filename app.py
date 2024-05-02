@@ -111,7 +111,7 @@ def yape():
             "Su email es: {}\n"
             "Su calle es: {}\n"
             "su telefono es: {}\n"
-            "El precio total es: {}").format(items_comprados, email, telefono, street_name, preciototal)
+            "El precio total es: {}").format(items_comprados, email, street_name, telefono, preciototal)
     em1.attach(MIMEText(content1, 'plain'))
     em1.attach(imagen_adjunta)
 
