@@ -102,7 +102,7 @@ def yape():
 
     # Primer correo
     em1 = MIMEMultipart()
-    em1['From'] = user
+    em1['From'] = "info@qillari.com"
     em1['To'] = "qillari120@gmail.com"
     em1['Subject'] = subject_vendedor
     content1 = ("Nuevo comprador\n"
@@ -117,7 +117,7 @@ def yape():
 
     # Segundo correo
     em2 = EmailMessage()
-    em2['From'] = user
+    em2['From'] = "info@qillari.com"
     em2['To'] = email
     em2['Subject'] = subject_comprador
     content2 = ("Su compra paso con exito\n"
@@ -131,8 +131,8 @@ def yape():
 
     with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
         smtp.login(user, app_password)
-        smtp.sendmail("info@qillari.com", "qillari120@gmail.com", em1.as_string())
-        smtp.sendmail("info@qillari.com", email, em2.as_string())
+        smtp.sendmail( user, "qillari120@gmail.com", em1.as_string())
+        smtp.sendmail( user, email, em2.as_string())
 
 
     return jsonify({
