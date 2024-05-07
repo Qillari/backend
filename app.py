@@ -14,11 +14,17 @@ import json
 app=Flask(__name__)
 CORS(app, origins=['https://front-end-qillari.vercel.app/', 'https://front-end-qillari.vercel.app', 'https://www.front-end-qillari.vercel.app/', 'https://www.qillari.vercel.app', "https://qillari.com/", "https://www.qillari.com/", "https://qillari.com", "https://www.qillari.com" ])
 
+with open('anillos.json') as file:
+    anillos = json.load(file)
 
-pulseras = 1
-collares = 1
-aretes = 1 
-anillos = 1
+with open('aretes.json') as file1:
+    aretes = json.load(file1)
+
+with open('collares.json') as file2:
+    collares = json.load(file2)
+
+with open('pulseras.json') as file3:
+    pulseras = json.load(file3)
 
 @app.after_request
 def after_request(response):
@@ -230,7 +236,7 @@ def correo_newsletter():
     })
 
 @app.route('/api/anillos/<producto_id>')
-def obtener_producto(producto_id):
+def obtener_anillos(producto_id):
     producto = anillos.get(producto_id)
     if producto:
         return jsonify(producto)
@@ -238,7 +244,7 @@ def obtener_producto(producto_id):
         return jsonify({"mensaje": "Producto no encontrado"}), 404
 
 @app.route('/api/aretes/<producto_id>')
-def obtener_producto(producto_id):
+def obtener_aretes(producto_id):
     producto = aretes.get(producto_id)
     if producto:
         return jsonify(producto)
@@ -246,7 +252,7 @@ def obtener_producto(producto_id):
         return jsonify({"mensaje": "Producto no encontrado"}), 404
 
 @app.route('/api/pulseras/<producto_id>')
-def obtener_producto(producto_id):
+def obtener_pulseras(producto_id):
     producto = pulseras.get(producto_id)
     if producto:
         return jsonify(producto)
@@ -254,7 +260,7 @@ def obtener_producto(producto_id):
         return jsonify({"mensaje": "Producto no encontrado"}), 404
 
 @app.route('/api/collares/<producto_id>')
-def obtener_producto(producto_id):
+def obtener_collares(producto_id):
     producto = collares.get(producto_id)
     if producto:
         return jsonify(producto)
