@@ -230,7 +230,7 @@ def correo_newsletter():
 def obtener_productos():
     return jsonify(productos)
 
-@app.route('/api/productos/<string:producto_id>')
+@app.route('/api/productos/<producto_id>')
 def obtener_producto(producto_id):
     producto = productos.get(producto_id)
     if producto:
