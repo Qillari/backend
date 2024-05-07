@@ -14,17 +14,11 @@ import json
 app=Flask(__name__)
 CORS(app, origins=['https://front-end-qillari.vercel.app/', 'https://front-end-qillari.vercel.app', 'https://www.front-end-qillari.vercel.app/', 'https://www.qillari.vercel.app', "https://qillari.com/", "https://www.qillari.com/", "https://qillari.com", "https://www.qillari.com" ])
 
-with open('anillos.json') as file:
-    anillos = json.load(file)
 
-with open('aretes.json') as file1:
-    aretes = json.load(file1)
-
-with open('collares.json') as file2:
-    collares = json.load(file2)
-
-with open('pulseras.json') as file3:
-    pulseras = json.load(file3)
+pulseras = 1
+collares = 1
+aretes = 1 
+anillos = 1
 
 @app.after_request
 def after_request(response):
