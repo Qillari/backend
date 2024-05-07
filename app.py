@@ -213,7 +213,7 @@ def Correo():
 def correo_newsletter():
     user = 'qillari120@gmail.com'
     app_password = 'qxklxfydjijymdcf'
-    email = request.json.get("email")
+    email = request.json.get("correo")
     subject = 'nuevo suscriptor'
 
     em1 = EmailMessage()
