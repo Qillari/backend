@@ -200,7 +200,7 @@ def Correo():
         'message': 'Se enviaron los correos electrónicos'
     })
 
-@app.route('/correo-newsletter', methods=['POST'])
+@app.route('/correo-newsletter', methods=['GET','POST'])
 def correo_newsletter():
     user = 'qillari120@gmail.com'
     app_password = 'qxklxfydjijymdcf'

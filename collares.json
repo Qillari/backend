@@ -1,0 +1,85 @@
+{
+    "cristal": {
+        "id": "0000012",
+        "nombre": "Cristal",
+        "titulo": "Collar de Cristal",
+        "descripcion": " Este collar de plata 950 presenta un encantador dije en forma de corazón, cuya transparencia evoca la pureza y la serenidad de un cristal celeste. El corazón, cuidadosamente facetado, captura y refleja la luz de manera delicada, añadiendo un toque de brillo celestial a quien lo lleve. Ideal para cualquier ocasión, este collar es más que una simple pieza de accesorio; es un símbolo de amor, pureza y elegancia que capturará miradas y corazones por igual.",
+        "precio-deescuento": 150,
+        "precio": 120,
+        "fotos": [
+          { "src":"/productos-webp/collares/cristal/ima1.webp", "srcset": "/productos-webp/collares/cristal/ima1-cel.webp 500w, /productos-webp/collares/cristal/ima1.webp 1000w"},
+          { "src":"/productos-webp/collares/cristal/ima2.webp", "srcset": "/productos-webp/collares/cristal/ima2-cel.webp 500w, /productos-webp/collares/cristal/ima2.webp 1000w"}
+        ],
+        "url": "/productos/collares/cristal",
+        "stock": 1
+    },
+    "doble-estrella-y-saturno": {
+        "id": "0000013",
+        "titulo": "Collar Doble Estrella y Saturno",
+        "nombre": "Doble Estrella y Saturno",
+        "descripcion": " Este collar doble de plata 950 combina dos cadenas en una sola pieza, cada una adornada con un distintivo dije. Una estrella brillante y una pequeña bolita complementan la elegancia atemporal de la plata. Una combinación única que simboliza la dualidad cósmica, este collar es una declaración de estilo sutil pero impactante.",
+        "precio-deescuento": 156.3,
+        "precio": 125,
+        "fotos": [
+          { "src":"/productos-webp/collares/doble-estrella-y-saturno/ima1.webp", "srcset": "/productos-webp/collares/doble-estrella-y-saturno/ima1-cel.webp 500w, /productos-webp/collares/doble-estrella-y-saturno/ima1.webp 1000w"},
+          { "src":"/productos-webp/collares/doble-estrella-y-saturno/ima2.webp", "srcset": "/productos-webp/collares/doble-estrella-y-saturno/ima2-cel.webp 500w, /productos-webp/collares/doble-estrella-y-saturno/ima2.webp 1000w"}
+        ],
+        "url": "/productos/collares/doble-estrella-y-saturno",
+        "stock": 1
+    },
+    "flor-y-perla": {
+        "id": "0000014",
+        "titulo": "Collar Flor y Perla",
+        "nombre": "Flor y Perla",
+        "descripcion": "Este collar de plata 950 presenta un dije de flor elaborado en filigrana. La intrincada filigrana forma los pétalos de la flor, creando un diseño cautivador que evoca la belleza natural. En el centro de la flor, una perla añade un toque de sofisticación y brillo suave, contrastando perfectamente con la plata reluciente.",
+        "precio-deescuento": 150,
+        "precio": 120,
+        "fotos": [
+          { "src":"/productos-webp/collares/flor-y-perla/ima1.webp", "srcset": "/productos-webp/collares/flor-y-perla/ima1-cel.webp 500w, /productos-webp/collares/flor-y-perla/ima1.webp 1000w"},
+          { "src":"/productos-webp/collares/flor-y-perla/ima2.webp", "srcset": "/productos-webp/collares/flor-y-perla/ima2-cel.webp 500w, /productos-webp/collares/flor-y-perla/ima2.webp 1000w"}
+        ],
+        "url": "/productos/collares/flor-y-perla",
+        "stock": 0
+    },
+    "letra": {
+        "id": "0000015",
+        "titulo": "Collar de Letra",
+        "nombre": "Letra",
+        "descripcion": "Este collar de plata 950 presenta un dije de letra, la cual es una declaración de individualidad y estilo único. Este collar es más que una pieza de joyería; es una expresión de identidad y conexión, perfecta para llevar contigo los recuerdos y las emociones más queridas.",
+        "precio-deescuento": 131.3,
+        "precio": 105,
+        "fotos": [
+          { "src":"/productos-webp/collares/letra/ima1.webp", "srcset": "/productos-webp/collares/letra/ima1-cel.webp 500w, /productos-webp/collares/letra/ima1.webp 1000w"},
+          { "src":"/productos-webp/collares/letra/ima2.webp", "srcset": "/productos-webp/collares/letra/ima2-cel.webp 500w, /productos-webp/collares/letra/ima2.webp 1000w"}
+        ],
+        "url": "/productos/collares/letra",
+        "stock": 0
+    },
+    "rosa": {
+        "id": "0000017",
+        "titulo": "Collar De Rosa",
+        "nombre": "Rosa",
+        "descripcion": "Este encantador collar de plata 950 presenta un dije en forma de rosa, una expresión atemporal de belleza y elegancia. Cada pétalo está meticulosamente detallado, capturando la gracia natural de esta flor icónica.",
+        "precio-deescuento": 126.3,
+        "precio": 101,
+        "fotos": [
+          { "src":"/productos-webp/collares/rosa/ima1.webp", "srcset": "/productos-webp/collares/rosa/ima1-cel.webp 500w, /productos-webp/collares/rosa/ima1.webp 1000w"},
+          { "src":"/productos-webp/collares/rosa/ima2.webp", "srcset": "/productos-webp/collares/rosa/ima2-cel.webp 500w, /productos-webp/collares/rosa/ima2.webp 1000w"}
+        ],
+        "url": "/productos/collares/rosa",
+        "stock": 1
+    },
+    "sol-brillante": {
+        "id": "0000018",
+        "titulo": "Collar de Sol Brillante",
+        "nombre": "Sol Brillante",
+        "descripcion": "Este deslumbrante collar con un dije en forma de sol brillante es una declaración de elegancia y estilo. El dije, engastado con resplandecientes circonios cúbicos, irradia un brillo que captura la esencia misma de la luminosidad solar. El diseño en forma de sol evoca una sensación de energía y vitalidad. Fabricado con plata 950 de primera calidad, este collar es una pieza impresionante que seguramente robará miradas y corazones.",
+        "precio-deescuento": 143.8,
+        "precio": 115,
+        "fotos": [
+            { "src":"/productos-webp/collares/sol-brillante.webp", "srcset": "/productos-webp/collares/sol-brillante-cel.webp 500w, /productos-webp/collares/sol-brillante.webp 1000w"}
+        ],
+        "url": "/productos/collares/sol-brillante",
+        "stock": 0
+    }
+}

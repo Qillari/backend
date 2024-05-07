@@ -1,0 +1,81 @@
+{
+    "arbol-de-la-vida-regulable": {
+        "id": "0000018",
+        "titulo": "Collar de Sol Brillante",
+        "nombre": "Sol Brillante",
+        "descripcion": "Este deslumbrante collar con un dije en forma de sol brillante es una declaración de elegancia y estilo. El dije, engastado con resplandecientes circonios cúbicos, irradia un brillo que captura la esencia misma de la luminosidad solar. El diseño en forma de sol evoca una sensación de energía y vitalidad. Fabricado con plata 950 de primera calidad, este collar es una pieza impresionante que seguramente robará miradas y corazones.",
+        "precio-deescuento": 143.8,
+        "precio": 115,
+        "fotos": [
+          { "src":"/productos-webp/collares/sol-brillante.webp", "srcset": "/productos-webp/collares/sol-brillante-cel.webp 500w, /productos-webp/collares/sol-brillante.webp 1000w"}
+        ],
+        "url": "/productos/collares/sol-brillante",
+        "stock": 0
+    },
+    "aris": {
+        "id": "0000020",
+        "titulo": "Pulsera Aris",
+        "nombre": "Aris",
+        "descripcion": " Esta pulsera de plata 950 es una expresión de simplicidad y elegancia refinada. Con un diseño minimalista, la pulsera presenta una superficie casi plana, adornada solo con unas pocas bolitas de plata. Cada bolita está delicadamente enmarcada por un borde de plata quemada, agregando un toque sutil de contraste y sofisticación. La belleza de esta pulsera reside en su simplicidad, lo que la convierte en un accesorio versátil que complementará cualquier atuendo con estilo y discreción.",
+        "precio-deescuento": 137.5,
+        "precio": 110,
+        "fotos": [
+          { "src":"/productos-webp/pulseras/aris.webp", "srcset": "/productos-webp/pulseras/aris-cel.webp 500w, /productos-webp/pulseras/aris.webp 1000w"}
+        ],
+        "url": "/productos/pulseras/aris",
+        "stock": 0
+    },
+    "atenea": {
+        "id": "0000021",
+        "titulo": "Pulsera Atenea",
+        "nombre": "Atenea",
+        "descripcion": " Esta pulsera de plata 950 es una pieza de elegancia atemporal. Entre los eslabones de plata, se intercalan delicadas bolitas, destacando los detalles de plata quemada que añaden un toque de sofisticación. Cada elemento está meticulosamente trabajado, reflejando la habilidad artesanal detrás de esta pulsera única. Es una adición refinada a cualquier atuendo, combinando la belleza clásica con un toque contemporáneo.",
+        "precio-deescuento": 137.5,
+        "precio": 110,
+        "fotos": [
+          { "src":"/productos-webp/pulseras/atenea.webp", "srcset": "/productos-webp/pulseras/atenea-cel.webp 500w, /productos-webp/pulseras/atenea.webp 1000w"}
+        ],
+        "url": "/productos/pulseras/atenea",
+        "stock": 0
+    },
+    "nudillos": {
+        "id": "0000022",
+        "titulo": "Pulsera Nudillos Perlas",
+        "nombre": "Nudillos Perlas",
+        "descripcion": "Esta pulsera de plata 950 es una pieza elegante y sofisticada. Cada perla, delicadamente ensartada, está separada por sutiles detalles de plata que añaden un toque de estilo a la pulsera. La combinación de la plata reluciente y las perlas radiantes crea un contraste encantador, resultando en una pulsera contemporánea y elegante. Perfecta para cualquier ocasión, esta pulsera es un complemento ideal para tu estilo diario.",
+        "precio-deescuento": 147.5,
+        "precio": 118,
+        "fotos": [
+          { "src":"/productos-webp/pulseras/nudillo-perlas.webp", "srcset": "/productos-webp/pulseras/nudillo-perlas-cel.webp 500w, /productos-webp/pulseras/nudillo-perlas.webp 1000w"}
+        ],
+        "url": "/productos/pulseras/nudillo-perlas",
+        "stock": 0
+    },
+    "perlas-sofia": {
+        "id": "0000023",
+        "titulo": "Pulsera De Perlas Sofia",
+        "nombre": "Perlas Sofia",
+        "descripcion": "Esta pulsera de perlas con detalles en plata 950 es una joya clásica y refinada. Cada perla, radiante y delicada, está cuidadosamente separada por pequeñas bolitas de plata, que añaden un toque de brillo y elegancia. La combinación de las perlas naturales y la plata reluciente crea un contraste encantador, resultando en una pulsera que irradia un encanto atemporal.",
+        "precio-deescuento": 135,
+        "precio": 108,
+        "fotos": [
+          { "src":"/productos-webp/pulseras/perlas-sofia.webp", "srcset": "/productos-webp/pulseras/perlas-sofia-cel.webp 500w, /productos-webp/pulseras/perlas-sofia.webp 1000w"}
+        ],
+        "url": "/productos/pulseras/perlas-sofia",
+        "stock": 0
+    },
+    "saturno": {
+        "id": "0000025",
+        "titulo": "Pulsera Saturno",
+        "nombre": "Saturno",
+        "descripcion": " Esta pulsera de plata presenta una cadena delicada y estilizada, adornada con pequeñas bolitas de plata a lo largo de su longitud. Cada bolita añade un toque de brillo y textura a la pulsera, creando un efecto encantador y elegante. Esta pieza minimalista es perfecta para aquellos que buscan un accesorio discreto pero distintivo que complemente cualquier conjunto con estilo y sofisticación.",
+        "precio-deescuento": 125,
+        "precio": 100,
+        "fotos": [
+          { "src":"/productos-webp/pulseras/saturno/ima1.webp", "srcset": "/productos-webp/pulseras/saturno/ima1-cel.webp 500w, /productos-webp/pulseras/saturno/ima1.webp 1000w"},
+          { "src":"/productos-webp/pulseras/saturno/ima2.webp", "srcset": "/productos-webp/pulseras/saturno/ima2-cel.webp 500w, /productos-webp/pulseras/saturno/ima2.webp 1000w"}
+        ],
+        "url": "/productos/pulseras/saturno",
+        "stock": 0
+    }
+}
