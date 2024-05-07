@@ -11,7 +11,7 @@ import uuid
 import base64
 
 app=Flask(__name__)
-CORS(app, origins=['https://front-end-qillari.vercel.app/', 'https://front-end-qillari.vercel.app', 'https://www.front-end-qillari.vercel.app/', 'https://www.qillari.vercel.app' ])
+CORS(app, origins=['https://front-end-qillari.vercel.app/', 'https://front-end-qillari.vercel.app', 'https://www.front-end-qillari.vercel.app/', 'https://www.qillari.vercel.app', "https://qillari.com/", "https://www.qillari.com/" ])
 
 @app.after_request
 def after_request(response):
@@ -133,6 +133,7 @@ def yape():
         smtp.login(user, app_password)
         smtp.sendmail( user, "qillari120@gmail.com", em1.as_string())
         smtp.sendmail( user, email, em2.as_string())
+        
 
 
     return jsonify({
@@ -218,7 +219,7 @@ def correo_newsletter():
     smtp.quit()
     return jsonify({
         'success': True,
-        'message': 'Se enviaron los correos electrónicos'
+        'message': 'Se registro correctamente'
     })
 
 if __name__ == '__main__':
