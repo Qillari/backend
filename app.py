@@ -229,7 +229,6 @@ def correo_newsletter():
         smtp.login(user, app_password)
         smtp.sendmail(user, "qillari120@gmail.com", em1.as_string())
 
-    smtp.quit()
     return jsonify({
         'success': True,
         'message': 'Se registro correctamente'
