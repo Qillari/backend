@@ -9,9 +9,13 @@ import ssl
 import smtplib
 import uuid
 import base64
+import json
 
 app=Flask(__name__)
 CORS(app, origins=['https://front-end-qillari.vercel.app/', 'https://front-end-qillari.vercel.app', 'https://www.front-end-qillari.vercel.app/', 'https://www.qillari.vercel.app', "https://qillari.com/", "https://www.qillari.com/" ])
+
+with open('productos.json') as file:
+    productos = json.load(file)
 
 @app.after_request
 def after_request(response):
@@ -221,6 +225,18 @@ def correo_newsletter():
         'success': True,
         'message': 'Se registro correctamente'
     })
+
+@app.route('/api/productos')
+def obtener_productos():
+    return jsonify(productos)
+
+@app.route('/api/productos/<string:producto_id>')
+def obtener_producto(producto_id):
+    producto = productos.get(producto_id)
+    if producto:
+        return jsonify(producto)
+    else:
+        return jsonify({"mensaje": "Producto no encontrado"}), 404
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
