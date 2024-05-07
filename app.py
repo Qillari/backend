@@ -14,8 +14,17 @@ import json
 app=Flask(__name__)
 CORS(app, origins=['https://front-end-qillari.vercel.app/', 'https://front-end-qillari.vercel.app', 'https://www.front-end-qillari.vercel.app/', 'https://www.qillari.vercel.app', "https://qillari.com/", "https://www.qillari.com/", "https://qillari.com", "https://www.qillari.com" ])
 
-with open('productos.json') as file:
-    productos = json.load(file)
+with open('anillos.json') as file:
+    anillos = json.load(file)
+
+with open('aretes.json') as file:
+    aretes = json.load(file)
+
+with open('collares.json') as file:
+    collares = json.load(file)
+
+with open('pulseras.json') as file:
+    pulseras = json.load(file)
 
 @app.after_request
 def after_request(response):
@@ -226,17 +235,38 @@ def correo_newsletter():
         'message': 'Se registro correctamente'
     })
 
-@app.route('/api/productos')
-def obtener_productos():
-    return jsonify(productos)
-
-@app.route('/api/productos/<producto_id>')
+@app.route('/api/anillos/<producto_id>')
 def obtener_producto(producto_id):
-    producto = productos.get(producto_id)
+    producto = anillos.get(producto_id)
     if producto:
         return jsonify(producto)
     else:
         return jsonify({"mensaje": "Producto no encontrado"}), 404
+
+@app.route('/api/aretes/<producto_id>')
+def obtener_producto(producto_id):
+    producto = aretes.get(producto_id)
+    if producto:
+        return jsonify(producto)
+    else:
+        return jsonify({"mensaje": "Producto no encontrado"}), 404
+
+@app.route('/api/pulseras/<producto_id>')
+def obtener_producto(producto_id):
+    producto = pulseras.get(producto_id)
+    if producto:
+        return jsonify(producto)
+    else:
+        return jsonify({"mensaje": "Producto no encontrado"}), 404
+
+@app.route('/api/collares/<producto_id>')
+def obtener_producto(producto_id):
+    producto = collares.get(producto_id)
+    if producto:
+        return jsonify(producto)
+    else:
+        return jsonify({"mensaje": "Producto no encontrado"}), 404
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
