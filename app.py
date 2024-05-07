@@ -17,14 +17,14 @@ CORS(app, origins=['https://front-end-qillari.vercel.app/', 'https://front-end-q
 with open('anillos.json') as file:
     anillos = json.load(file)
 
-with open('aretes.json') as file:
-    aretes = json.load(file)
+with open('aretes.json') as file1:
+    aretes = json.load(file1)
 
-with open('collares.json') as file:
-    collares = json.load(file)
+with open('collares.json') as file2:
+    collares = json.load(file2)
 
-with open('pulseras.json') as file:
-    pulseras = json.load(file)
+with open('pulseras.json') as file3:
+    pulseras = json.load(file3)
 
 @app.after_request
 def after_request(response):
