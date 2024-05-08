@@ -4,7 +4,7 @@
         "titulo": "Aretes Argollas Tamaño L",
         "nombre": "Argollas tamaño L",
         "descripcion": "Estos aretes de argollas delgadas, confeccionados en plata 950, son la perfecta combinación de estilo y sofisticación. Con un diseño minimalista y moderno, ofrecen una presencia llamativa pero refinada. Ya sea para el uso diario o para ocasiones especiales, estos aretes son una elección versátil y elegante que complementará tu estilo con un toque de distinción.",
-        "precio-deescuento": 112.8,
+        "precio-deescuento": 112.9,
         "precio": 94,
         "fotos": [
           { "src":"/productos-webp/aretes/argollas-tamaño-l/ima1-opcion2.webp", "srcset": "/productos-webp/aretes/argollas-tamaño-l/ima1-cel-opcion2.webp 500w, /productos-webp/aretes/argollas-tamaño-l/ima1-opcion2.webp 1000w"},
@@ -19,7 +19,7 @@
         "titulo": "Aretes Isabelle",
         "nombre": "Isabelle",
         "descripcion": "Estos encantadores aretes de plata 950 están diseñados para cautivar con su elegancia y originalidad. Con una forma única que evoca la belleza de una flor abstracta, estos aretes son una expresión artística de estilo.",
-        "precio-deescuento": 105.6,
+        "precio-deescuento": 105.9,
         "precio": 88,
         "fotos": [
           { "src":"/productos-webp/aretes/isabelle.webp", "srcset": "/productos-webp/aretes/isabelle-cel.webp 500w, /productos-webp/aretes/isabelle.webp 1000w"}
@@ -32,7 +32,7 @@
         "nombre": "Perlas",
         "titulo": "Aretes De Perlas",
         "descripcion": "Estos encantadores aretes pequeños presentan perlas delicadas y un diseño en plata 950, combinando la belleza natural de las perlas con la elegancia atemporal de la plata fina. Cada perla irradia un brillo suave y natural, añadiendo un toque de sofisticación a cualquier conjunto.",
-        "precio-deescuento": 117.6,
+        "precio-deescuento": 117.9,
         "precio": 98,
         "fotos": [
           {"src":"productos-webp/aretes/perlas.webp", "srcset": "/productos-webp/aretes/perlas-cel.webp 500w, /productos-webp/aretes/perlas.webp 1000w"}
@@ -45,7 +45,7 @@
         "titulo": "Aretes De Punto de Luz",
         "nombre": "Punto de Luz",
         "descripcion": "Estos encantadores aretes pequeños iluminan cualquier ocasión con elegancia y brillo. Cada arete presenta un brillante circonio engastado en plata fina 950, creando un destello sutil pero cautivador. Los hace perfectos para agregar un toque de glamour a cualquier conjunto.",
-        "precio-deescuento": 93.6,
+        "precio-deescuento": 93.9,
         "precio": 78,
         "fotos": [
           { "src":"/productos-webp/aretes/punto-de-luz.webp", "srcset": "/productos-webp/aretes/punto-de-luz-cel.webp 500w, /productos-webp/aretes/punto-de-luz.webp 1000w"}
@@ -58,7 +58,7 @@
         "titulo": "Aretes De Sol Brillante",
         "nombre": "Sol Brillante",
         "descripcion": "Estos aretes en forma de sol son una manifestación de la energía y vitalidad del astro rey. Cada pieza emite un brillo radiante. Los circones incrustados deslumbran con un resplandor cautivador, reflejando la majestuosidad y el esplendor del sol. Fabricados con plata 950 de alta calidad, estos aretes irradian una elegancia natural y un encanto magnético que no pasará desapercibido.",
-        "precio-deescuento": 105.6,
+        "precio-deescuento": 105.9,
         "precio": 88,
         "fotos": [
           { "src": "/productos/aretes/sol-brillante.jpg"}

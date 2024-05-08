@@ -1,23 +1,25 @@
 {
     "arbol-de-la-vida-regulable": {
-        "id": "0000018",
-        "titulo": "Collar de Sol Brillante",
-        "nombre": "Sol Brillante",
-        "descripcion": "Este deslumbrante collar con un dije en forma de sol brillante es una declaración de elegancia y estilo. El dije, engastado con resplandecientes circonios cúbicos, irradia un brillo que captura la esencia misma de la luminosidad solar. El diseño en forma de sol evoca una sensación de energía y vitalidad. Fabricado con plata 950 de primera calidad, este collar es una pieza impresionante que seguramente robará miradas y corazones.",
-        "precio-deescuento": 143.8,
-        "precio": 115,
+        "id": "0000024",
+        "titulo": "Pulsera Arbol De La Vida Regulable",
+        "nombre": "Arbol De La Vida Regulable",
+        "descripcion": "Esta pulsera regulable de plata 950 es un símbolo de conexión con la naturaleza y la vitalidad de la vida. En el centro, un encantador dije del árbol de la vida, símbolo universal de crecimiento, fuerza y renovación. La pulsera ajustable ofrece comodidad y versatilidad, adaptándose a cualquier muñeca con facilidad.",
+        "precio-deescuento": 137.9,
+        "precio": 110,
         "fotos": [
-          { "src":"/productos-webp/collares/sol-brillante.webp", "srcset": "/productos-webp/collares/sol-brillante-cel.webp 500w, /productos-webp/collares/sol-brillante.webp 1000w"}
+          { "src":"/productos-webp/pulseras/regulable-arbol-de-la-vida/ima1.webp", "srcset": "/productos-webp/pulseras/regulable-arbol-de-la-vida/ima1-cel.webp 500w, /productos-webp/pulseras/regulable-arbol-de-la-vida/ima1.webp 1000w"},
+          { "src":"/productos-webp/pulseras/regulable-arbol-de-la-vida/ima2.webp", "srcset": "/productos-webp/pulseras/regulable-arbol-de-la-vida/ima2-cel.webp 500w, /productos-webp/pulseras/regulable-arbol-de-la-vida/ima2.webp 1000w"},
+          { "src":"/productos-webp/pulseras/regulable-arbol-de-la-vida/ima3.webp", "srcset": "/productos-webp/pulseras/regulable-arbol-de-la-vida/ima3-cel.webp 500w, /productos-webp/pulseras/regulable-arbol-de-la-vida/ima3.webp 1000w"}
         ],
-        "url": "/productos/collares/sol-brillante",
-        "stock": 0
+        "url": "/productos/pulseras/arbol-de-la-vida-regulable",
+        "stock": 1
     },
     "aris": {
         "id": "0000020",
         "titulo": "Pulsera Aris",
         "nombre": "Aris",
         "descripcion": " Esta pulsera de plata 950 es una expresión de simplicidad y elegancia refinada. Con un diseño minimalista, la pulsera presenta una superficie casi plana, adornada solo con unas pocas bolitas de plata. Cada bolita está delicadamente enmarcada por un borde de plata quemada, agregando un toque sutil de contraste y sofisticación. La belleza de esta pulsera reside en su simplicidad, lo que la convierte en un accesorio versátil que complementará cualquier atuendo con estilo y discreción.",
-        "precio-deescuento": 137.5,
+        "precio-deescuento": 137.9,
         "precio": 110,
         "fotos": [
           { "src":"/productos-webp/pulseras/aris.webp", "srcset": "/productos-webp/pulseras/aris-cel.webp 500w, /productos-webp/pulseras/aris.webp 1000w"}
@@ -30,20 +32,20 @@
         "titulo": "Pulsera Atenea",
         "nombre": "Atenea",
         "descripcion": " Esta pulsera de plata 950 es una pieza de elegancia atemporal. Entre los eslabones de plata, se intercalan delicadas bolitas, destacando los detalles de plata quemada que añaden un toque de sofisticación. Cada elemento está meticulosamente trabajado, reflejando la habilidad artesanal detrás de esta pulsera única. Es una adición refinada a cualquier atuendo, combinando la belleza clásica con un toque contemporáneo.",
-        "precio-deescuento": 137.5,
+        "precio-deescuento": 137.9,
         "precio": 110,
         "fotos": [
           { "src":"/productos-webp/pulseras/atenea.webp", "srcset": "/productos-webp/pulseras/atenea-cel.webp 500w, /productos-webp/pulseras/atenea.webp 1000w"}
         ],
         "url": "/productos/pulseras/atenea",
-        "stock": 0
+        "stock": 1
     },
     "nudillo-perlas": {
         "id": "0000022",
         "titulo": "Pulsera Nudillos Perlas",
         "nombre": "Nudillos Perlas",
         "descripcion": "Esta pulsera de plata 950 es una pieza elegante y sofisticada. Cada perla, delicadamente ensartada, está separada por sutiles detalles de plata que añaden un toque de estilo a la pulsera. La combinación de la plata reluciente y las perlas radiantes crea un contraste encantador, resultando en una pulsera contemporánea y elegante. Perfecta para cualquier ocasión, esta pulsera es un complemento ideal para tu estilo diario.",
-        "precio-deescuento": 147.5,
+        "precio-deescuento": 147.9,
         "precio": 118,
         "fotos": [
           { "src":"/productos-webp/pulseras/nudillo-perlas.webp", "srcset": "/productos-webp/pulseras/nudillo-perlas-cel.webp 500w, /productos-webp/pulseras/nudillo-perlas.webp 1000w"}
