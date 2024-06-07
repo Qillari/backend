@@ -89,7 +89,9 @@
       "descripcion": "Este collar de plata 950 presenta un dije de ojo turco. El borde del dije, meticulosamente elaborado en plata 950, resalta la belleza y la singularidad del ojo turco en su centro. Con su diseño intrincado y su simbolismo antiguo de protección contra el mal de ojo, es un amuleto de buena fortuna y una declaración de estilo.",
       "precio-descuento": 125,
       "precio": 100,
-      "fotos": [{}],
+      "fotos": [
+        { "src": "", "srcset": "" }
+      ],
       "url": "/productos/collares/ojo-turco",
       "stock": 1
     },
@@ -100,7 +102,9 @@
       "descripcion": "Este exquisito collar de plata 950 evoca la serenidad del mar con su encantador dije de ola. Colgado de una fina cadena de plata, este collar es más que una simple pieza de joyería; es un recordatorio constante de la fuerza y la calma que se encuentran en las olas del mar. Perfecto para aquellos que buscan un toque de naturaleza y aventura en su estilo diario, este collar añade un toque de frescura y serenidad a cualquier conjunto.",
       "precio-descuento": 143.75,
       "precio": 115,
-      "fotos": [{}],
+      "fotos": [
+        { "src": "", "srcset": "" }
+      ],
       "url": "/productos/collares/ola",
       "stock": 1
     },
@@ -111,7 +115,9 @@
       "descripcion": "Este elegante collar de plata 950 es una exquisita manifestación de la delicadeza y el brillo. En su centro, cuelga un deslumbrante circonio, que irradia una luminosidad cautivadora. La plata, meticulosamente trabajada, rodea y realza el resplandor del circonio, creando un contraste encantador. Perfecto para iluminar cualquier atuendo, este collar añade un toque de elegancia y brillo a tu estilo diario.",
       "precio-descuento": 132.5,
       "precio": 106,
-      "fotos": [{}],
+      "fotos": [
+        { "src": "", "srcset": "" }
+      ],
       "url": "/productos/collares/punto-de-luz",
       "stock": 1
 

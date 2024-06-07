@@ -87,7 +87,11 @@
       "descripcion": "Esta pulsera regulable de plata 925 es una delicada expresión de amor y estilo. Con una cadena fina y elegante que se ajusta con facilidad a cualquier muñeca, esta pulsera es un símbolo de gracia y refinamiento. En el centro, un corazón radiante captura la atención, rodeado delicadamente por pequeñas bolitas de plata a ambos lados. Esta combinación de elementos crea un equilibrio armonioso entre la simplicidad y la elegancia, haciendo de esta pulsera el complemento perfecto para cualquier ocasión.",
       "precio-descuento": 103.75,
       "precio": 83,
-      "fotos": [{}],
+      "fotos": [
+        {
+          "src": "", "srcset": ""
+        }
+      ],
       "url": "/productos/pulseras/corazon-fino-regulable",
       "stock": 2
     },

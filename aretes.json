@@ -73,7 +73,9 @@
         "descripcion": "Estos encantadores aretes de plata 950 son una combinación perfecta de elegancia y estilo. En el centro de cada arete, se encuentra un delicado nudo de plata, que simboliza la unión y la conexión. En cada esquina del nudo, se encuentran cuidadosamente colocadas unas bolitas de plata, añadiendo un toque de textura y brillo a la pieza. La artesanía meticulosa y el diseño único hacen que estos aretes sean una opción versátil y sofisticada para cualquier ocasión.",
         "precio-descuento": 79.2,
         "precio": 66,
-        "fotos": [{}],
+        "fotos": [
+          { "src": "", "srcset": "" }
+        ],
         "url": "/productos/aretes/nudillos",
         "stock": 2
       },
@@ -89,7 +91,7 @@
             "descripcion": "Estos encantadores aretes entorchados de plata 950 son una expresión de delicadeza y refinamiento. Cada aro conserva un diseño entorchado intrincado que los hace únicos. Siendo más pequeños y delicados, mantienen una presencia encantadora. Su tamaño los convierte en un accesorio versátil que se adapta perfectamente a cualquier atuendo, ya sea informal o elegante.",
             "precio-descuento": 81.6,
             "precio": 68,
-            "fotos": [{}],
+            "fotos": [{ "src": "", "srcset": "" }],
             "stock": 1
           },
           "entorchado M": {
@@ -99,7 +101,7 @@
             "descripcion": "Estos imponentes aretes entorchados de plata 950 son una declaración de estilo audaz y elegancia. Cada aro presenta un diseño intrincado de torzal, que añade textura y dimensión a la pieza. El tamaño más grande resalta la presencia de estos aretes, haciendo una declaración de moda que no pasa desapercibida. Con su brillo reluciente y su llamativo diseño, estos aretes son el complemento perfecto para cualquier ocasión especial o una salida nocturna.",
             "precio-descuento": 120,
             "precio": 100,
-            "fotos": [{}],
+            "fotos": [{ "src": "", "srcset": "" }],
             "stock": 1
           }
         }
