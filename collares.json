@@ -4,7 +4,7 @@
         "nombre": "Cristal",
         "titulo": "Collar de Cristal",
         "descripcion": " Este collar de plata 950 presenta un encantador dije en forma de corazón, cuya transparencia evoca la pureza y la serenidad de un cristal celeste. El corazón, cuidadosamente facetado, captura y refleja la luz de manera delicada, añadiendo un toque de brillo celestial a quien lo lleve. Ideal para cualquier ocasión, este collar es más que una simple pieza de accesorio; es un símbolo de amor, pureza y elegancia que capturará miradas y corazones por igual.",
-        "precio-deescuento": 150,
+        "precio-descuento": 150,
         "precio": 120,
         "fotos": [
           { "src":"/productos-webp/collares/cristal/ima1.webp", "srcset": "/productos-webp/collares/cristal/ima1-cel.webp 500w, /productos-webp/collares/cristal/ima1.webp 1000w"},
@@ -18,7 +18,7 @@
         "titulo": "Collar Doble Estrella y Saturno",
         "nombre": "Doble Estrella y Saturno",
         "descripcion": " Este collar doble de plata 950 combina dos cadenas en una sola pieza, cada una adornada con un distintivo dije. Una estrella brillante y una pequeña bolita complementan la elegancia atemporal de la plata. Una combinación única que simboliza la dualidad cósmica, este collar es una declaración de estilo sutil pero impactante.",
-        "precio-deescuento": 156.9,
+        "precio-descuento": 156.9,
         "precio": 125,
         "fotos": [
           { "src":"/productos-webp/collares/doble-estrella-y-saturno/ima1.webp", "srcset": "/productos-webp/collares/doble-estrella-y-saturno/ima1-cel.webp 500w, /productos-webp/collares/doble-estrella-y-saturno/ima1.webp 1000w"},
@@ -32,7 +32,7 @@
         "titulo": "Collar Flor y Perla",
         "nombre": "Flor y Perla",
         "descripcion": "Este collar de plata 950 presenta un dije de flor elaborado en filigrana. La intrincada filigrana forma los pétalos de la flor, creando un diseño cautivador que evoca la belleza natural. En el centro de la flor, una perla añade un toque de sofisticación y brillo suave, contrastando perfectamente con la plata reluciente.",
-        "precio-deescuento": 150,
+        "precio-descuento": 150,
         "precio": 120,
         "fotos": [
           { "src":"/productos-webp/collares/flor-y-perla/ima1.webp", "srcset": "/productos-webp/collares/flor-y-perla/ima1-cel.webp 500w, /productos-webp/collares/flor-y-perla/ima1.webp 1000w"},
@@ -46,7 +46,7 @@
         "titulo": "Collar de Letra",
         "nombre": "Letra",
         "descripcion": "Este collar de plata 950 presenta un dije de letra, la cual es una declaración de individualidad y estilo único. Este collar es más que una pieza de joyería; es una expresión de identidad y conexión, perfecta para llevar contigo los recuerdos y las emociones más queridas.",
-        "precio-deescuento": 131.9,
+        "precio-descuento": 131.9,
         "precio": 105,
         "fotos": [
           { "src":"/productos-webp/collares/letra/ima1.webp", "srcset": "/productos-webp/collares/letra/ima1-cel.webp 500w, /productos-webp/collares/letra/ima1.webp 1000w"},
@@ -60,7 +60,7 @@
         "titulo": "Collar Rosa",
         "nombre": "Rosa",
         "descripcion": "Este encantador collar de plata 950 presenta un dije en forma de rosa, una expresión atemporal de belleza y elegancia. Cada pétalo está meticulosamente detallado, capturando la gracia natural de esta flor icónica.",
-        "precio-deescuento": 126.9,
+        "precio-descuento": 126.9,
         "precio": 101,
         "fotos": [
           { "src":"/productos-webp/collares/rosa/ima1.webp", "srcset": "/productos-webp/collares/rosa/ima1-cel.webp 500w, /productos-webp/collares/rosa/ima1.webp 1000w"},
@@ -74,12 +74,46 @@
         "titulo": "Collar de Sol Brillante",
         "nombre": "Sol Brillante",
         "descripcion": "Este deslumbrante collar con un dije en forma de sol brillante es una declaración de elegancia y estilo. El dije, engastado con resplandecientes circonios cúbicos, irradia un brillo que captura la esencia misma de la luminosidad solar. El diseño en forma de sol evoca una sensación de energía y vitalidad. Fabricado con plata 950 de primera calidad, este collar es una pieza impresionante que seguramente robará miradas y corazones.",
-        "precio-deescuento": 143.9,
+        "precio-descuento": 143.9,
         "precio": 115,
         "fotos": [
             { "src":"/productos-webp/collares/sol-brillante.webp", "srcset": "/productos-webp/collares/sol-brillante-cel.webp 500w, /productos-webp/collares/sol-brillante.webp 1000w"}
         ],
         "url": "/productos/collares/sol-brillante",
         "stock": 0
+    },
+    "ojo-turco": {
+      "id": "0000016",
+      "titulo": "Collar de Ojo Turco",
+      "nombre": "Ojo Turco",
+      "descripcion": "Este collar de plata 950 presenta un dije de ojo turco. El borde del dije, meticulosamente elaborado en plata 950, resalta la belleza y la singularidad del ojo turco en su centro. Con su diseño intrincado y su simbolismo antiguo de protección contra el mal de ojo, es un amuleto de buena fortuna y una declaración de estilo.",
+      "precio-descuento": 125,
+      "precio": 100,
+      "fotos": [{}],
+      "url": "/productos/collares/ojo-turco",
+      "stock": 1
+    },
+    "ola": {
+      "id": "0000032",
+      "titulo": "Collar Ola",
+      "nombre": "Ola",
+      "descripcion": "Este exquisito collar de plata 950 evoca la serenidad del mar con su encantador dije de ola. Colgado de una fina cadena de plata, este collar es más que una simple pieza de joyería; es un recordatorio constante de la fuerza y la calma que se encuentran en las olas del mar. Perfecto para aquellos que buscan un toque de naturaleza y aventura en su estilo diario, este collar añade un toque de frescura y serenidad a cualquier conjunto.",
+      "precio-descuento": 143.75,
+      "precio": 115,
+      "fotos": [{}],
+      "url": "/productos/collares/ola",
+      "stock": 1
+    },
+    "punto-de-luz": {
+      "id": "0000030",
+      "titulo": "Collar Punto de Luz",
+      "nombre": "Punto de Luz",
+      "descripcion": "Este elegante collar de plata 950 es una exquisita manifestación de la delicadeza y el brillo. En su centro, cuelga un deslumbrante circonio, que irradia una luminosidad cautivadora. La plata, meticulosamente trabajada, rodea y realza el resplandor del circonio, creando un contraste encantador. Perfecto para iluminar cualquier atuendo, este collar añade un toque de elegancia y brillo a tu estilo diario.",
+      "precio-descuento": 132.5,
+      "precio": 106,
+      "fotos": [{}],
+      "url": "/productos/collares/punto-de-luz",
+      "stock": 1
+
     }
 }
