@@ -13,6 +13,7 @@ import smtplib
 import uuid
 import base64
 import json
+import time
 
 app=Flask(__name__)
 CORS(app, origins=['https://front-end-qillari.vercel.app/', 'https://front-end-qillari.vercel.app', 'https://www.front-end-qillari.vercel.app/', 'https://www.qillari.vercel.app', "https://qillari.com/", "https://www.qillari.com/", "https://qillari.com", "https://www.qillari.com" ])
@@ -478,14 +479,22 @@ def crud_fotos():
         return jsonify({'error': str(e)}), 500
 
 @app.route("/crud-stock", methods=['GET'])
-@cache.cached(timeout=86400, query_string=True)
 def get_stock():
     try:
         data = request.args
         cantidad = data.get("cantidad", 0)
+        
+        tiempo_inicio = time.time()
         stocks = Stock.query.all()
+        tiempo_final = time.time()
+
+        tiempo_transcurrido = tiempo_final - tiempo_inicio
+        print(f"Tiempo transcurrido: {tiempo_transcurrido} segundos")
+
+
         stock_total = [s.to_dict() for s in stocks]
         resultado = jsonify(stock_total)
+
         return (resultado), 200
     except Exception as e:
         db.session.rollback()
