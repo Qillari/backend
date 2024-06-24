@@ -145,18 +145,6 @@ class GananciaPerdidaMensual(db.Model):
             'total': float(self.total)
         }
 
-with open('anillos.json') as file:
-    anillos = json.load(file)
-
-with open('aretes.json') as file1:
-    aretes = json.load(file1)
-
-with open('collares.json') as file2:
-    collares = json.load(file2)
-
-with open('pulseras.json') as file3:
-    pulseras = json.load(file3)
-
 @app.after_request
 def after_request(response):
     response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorizations, true")
@@ -363,41 +351,6 @@ def correo_newsletter():
         'success': True,
         'message': 'Se registro correctamente'
     })
-
-@app.route('/api/anillos/<producto_id>', methods=['GET'] )
-def obtener_anillos(producto_id):
-    producto = anillos.get(producto_id)
-    if producto:
-        return jsonify(producto)
-    else:
-        return jsonify({"mensaje": "Producto no encontrado"}), 404
-
-@app.route('/api/aretes/<producto_id>', methods=['GET'])
-def obtener_aretes(producto_id):
-    producto = aretes.get(producto_id)
-    if producto:
-        return jsonify(producto)
-    else:
-        return jsonify({"mensaje": "Producto no encontrado"}), 404
-
-@app.route('/api/pulseras/<producto_id>', methods=['GET'])
-def obtener_pulseras(producto_id):
-    producto = pulseras.get(producto_id)
-    if producto:
-        return jsonify(producto)
-    else:
-        return jsonify({"mensaje": "Producto no encontrado"}), 404
-
-@app.route('/api/collares/<producto_id>', methods=['GET'])
-def obtener_collares(producto_id):
-    producto = collares.get(producto_id)
-    if producto:
-        return jsonify(producto)
-    else:
-        return jsonify({"mensaje": "Producto no encontrado"}), 404
-
-
-
 
 @app.route("/login", methods=['GET'])
 def login():
