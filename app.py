@@ -66,17 +66,6 @@ class Stock(db.Model):
             'url': self.url
         }
 
-    def to_dict(self):
-        return {
-            'producto_id': self.producto_id,
-            'src1': self.src1,
-            'srcset1': self.srcset1,
-            'src2': self.src2,
-            'srcset2': self.srcset2,
-            'src3': self.src3,
-            'srcset3': self.srcset3
-        }
-
 class Compras(db.Model):
     __tablename__ = 'compras'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
