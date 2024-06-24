@@ -483,16 +483,16 @@ def get_stock():
     try:
         data = request.args
         cantidad = data.get("cantidad", 0)
+        stocks = Stock.query.all()
         
         tiempo_inicio = time.time()
-        stocks = Stock.query.all()
-        tiempo_final = time.time()
+        stock_total = [s.to_dict() for s in stocks]
 
+        tiempo_final = time.time()
         tiempo_transcurrido = tiempo_final - tiempo_inicio
         print(f"Tiempo transcurrido: {tiempo_transcurrido} segundos")
 
 
-        stock_total = [s.to_dict() for s in stocks]
         resultado = jsonify(stock_total)
 
         return (resultado), 200
