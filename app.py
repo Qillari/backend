@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_caching import Cache
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.dialects.mysql import JSON
 from sqlalchemy import func, ForeignKey
 import mercadopago
 from email.mime.multipart import MIMEMultipart
@@ -45,11 +46,11 @@ class Stock(db.Model):
     precio_sin_descuento = db.Column(db.Numeric(precision=10, scale=2), nullable=False)
     precio = db.Column(db.Numeric(precision=10, scale=2), nullable=False)
     url = db.Column(db.String(255), nullable=False)
+    fotos = db.Column(JSON, nullable=True)
 
     compras = db.relationship('Compras', backref='stock', lazy=True, passive_deletes=True)
     ventas = db.relationship('Ventas', backref='stock', lazy=True, passive_deletes=True)
     ganancia_perdida = db.relationship('GananciaPerdidaMensual', backref='stock', uselist=False)
-    fotos = db.relationship('Fotos', backref='Stock', cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
@@ -61,18 +62,9 @@ class Stock(db.Model):
             'cantidad': self.cantidad,
             'precio_sin_descuento': float(self.precio_sin_descuento),
             'precio': float(self.precio),
+            'fotos': self.fotos,
             'url': self.url
         }
-    
-class Fotos(db.Model):
-    __tablename__ = 'fotos'
-    producto_id = db.Column(db.String(255), ForeignKey('stock.id'), nullable=False, primary_key=True)
-    src1 = db.Column(db.String(255), nullable=False)
-    srcset1 = db.Column(db.String(255), nullable=False)
-    src2 = db.Column(db.String(255), nullable=True)
-    srcset2 = db.Column(db.String(255), nullable=True)
-    src3 = db.Column(db.String(255), nullable=True)
-    srcset3 = db.Column(db.String(255), nullable=True)
 
     def to_dict(self):
         return {
@@ -484,12 +476,7 @@ def get_stock():
         cantidad = data.get("cantidad", 0)
         stocks = Stock.query.all()
 
-        tiempo_inicio = time.time()
         stock_total = [s.to_dict() for s in stocks]
-        tiempo_final = time.time()
-        tiempo_transcurrido = tiempo_final - tiempo_inicio
-        print(f"Tiempo transcurrido: {tiempo_transcurrido} segundos")
-
 
         resultado = jsonify(stock_total)
 
