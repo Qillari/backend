@@ -13,7 +13,6 @@ import smtplib
 import uuid
 import base64
 import json
-import time
 
 app=Flask(__name__)
 CORS(app, origins=['https://front-end-qillari.vercel.app/', 'https://front-end-qillari.vercel.app', 'https://www.front-end-qillari.vercel.app/', 'https://www.qillari.vercel.app', "https://qillari.com/", "https://www.qillari.com/", "https://qillari.com", "https://www.qillari.com" ])
@@ -484,14 +483,7 @@ def get_stock():
         data = request.args
         cantidad = data.get("cantidad", 0)
         stocks = Stock.query.all()
-        
-        tiempo_inicio = time.time()
         stock_total = [s.to_dict() for s in stocks]
-
-        tiempo_final = time.time()
-        tiempo_transcurrido = tiempo_final - tiempo_inicio
-        print(f"Tiempo transcurrido: {tiempo_transcurrido} segundos")
-
 
         resultado = jsonify(stock_total)
 
