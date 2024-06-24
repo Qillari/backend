@@ -11,5 +11,14 @@
       "src": "/(.*)",
       "dest": "app.py"
     }
-  ]
+  ],
+  "dependencies": {
+    "include": [
+      "Flask",
+      "Flask-CORS",
+      "Flask-SQLAlchemy",
+      "mercadopago",
+      "sqlalchemy"
+    ]
+  }
 }
