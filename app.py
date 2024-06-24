@@ -15,8 +15,8 @@ import base64
 import json
 
 app=Flask(__name__)
-#CORS(app, origins=['https://front-end-qillari.vercel.app/', 'https://front-end-qillari.vercel.app', 'https://www.front-end-qillari.vercel.app/', 'https://www.qillari.vercel.app', "https://qillari.com/", "https://www.qillari.com/", "https://qillari.com", "https://www.qillari.com" ])
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app, origins=['https://front-end-qillari.vercel.app/', 'https://front-end-qillari.vercel.app', 'https://www.front-end-qillari.vercel.app/', 'https://www.qillari.vercel.app', "https://qillari.com/", "https://www.qillari.com/", "https://qillari.com", "https://www.qillari.com" ])
+#CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 app.config['SECRET_KEY'] = "helloworld"
