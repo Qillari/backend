@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from flask_caching import Cache
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func, ForeignKey
 import mercadopago
@@ -14,16 +15,21 @@ import base64
 import json
 
 app=Flask(__name__)
-CORS(app, origins=['https://front-end-qillari.vercel.app/', 'https://front-end-qillari.vercel.app', 'https://www.front-end-qillari.vercel.app/', 'https://www.qillari.vercel.app', "https://qillari.com/", "https://www.qillari.com/", "https://qillari.com", "https://www.qillari.com" ])
-#CORS(app, resources={r"/*": {"origins": "*"}})
+#CORS(app, origins=['https://front-end-qillari.vercel.app/', 'https://front-end-qillari.vercel.app', 'https://www.front-end-qillari.vercel.app/', 'https://www.qillari.vercel.app', "https://qillari.com/", "https://www.qillari.com/", "https://qillari.com", "https://www.qillari.com" ])
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 app.config['SECRET_KEY'] = "helloworld"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://u585862261_admin:Fiorellaydiego1.@srv1198.hstgr.io:3306/u585862261_datos'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
-    'pool_pre_ping': True
+    'pool_pre_ping': True,
+    'pool_size': 10,
+    'max_overflow': 20 
 }
+
+app.config['CACHE_TYPE'] = 'simple'
+cache = Cache(app)
 
 db = SQLAlchemy(app)
 
@@ -518,7 +524,22 @@ def crud_fotos():
 
         return jsonify({'error': str(e)}), 500
 
-@app.route("/crud-stock", methods=['GET', 'POST', 'PUT', 'DELETE'])
+@app.route("/crud-stock", methods=['GET'])
+@cache.cached(timeout=86400, query_string=True)
+def get_stock():
+    try:
+        data = request.args
+        cantidad = data.get("cantidad", 0)
+        stocks = Stock.query.all()
+        stock_total = [s.to_dict() for s in stocks]
+        resultado = jsonify(stock_total)
+        return (resultado), 200
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error en la solicitud GET /crud-stock: {e}")
+        return jsonify({'error': str(e)}), 500
+    
+@app.route("/crud-stock", methods=['POST', 'PUT', 'DELETE'])
 def crud_stock():
     try:
         if request.method == 'GET':
