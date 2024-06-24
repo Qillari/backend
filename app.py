@@ -1,5 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func, ForeignKey
 import mercadopago
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -12,7 +14,130 @@ import base64
 import json
 
 app=Flask(__name__)
-CORS(app, origins=['https://front-end-qillari.vercel.app/', 'https://front-end-qillari.vercel.app', 'https://www.front-end-qillari.vercel.app/', 'https://www.qillari.vercel.app', "https://qillari.com/", "https://www.qillari.com/", "https://qillari.com", "https://www.qillari.com" ])
+#CORS(app, origins=['https://front-end-qillari.vercel.app/', 'https://front-end-qillari.vercel.app', 'https://www.front-end-qillari.vercel.app/', 'https://www.qillari.vercel.app', "https://qillari.com/", "https://www.qillari.com/", "https://qillari.com", "https://www.qillari.com" ])
+CORS(app, resources={r"/*": {"origins": "*"}})
+
+
+app.config['SECRET_KEY'] = "helloworld"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://u585862261_admin:Fiorellaydiego1.@srv1198.hstgr.io:3306/u585862261_datos'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    'pool_pre_ping': True
+}
+
+db = SQLAlchemy(app)
+
+class Stock(db.Model):
+    __tablename__ = 'stock'
+    id = db.Column(db.String(255), primary_key=True, nullable=False)
+    titulo = db.Column(db.String(255), nullable=False)
+    nombre_link = db.Column(db.String(255), nullable=False)
+    descripcion = db.Column(db.Text , nullable=False)
+    tipo = db.Column(db.String(255), nullable=False)
+    cantidad = db.Column(db.Integer, nullable=False)
+    precio_sin_descuento = db.Column(db.Numeric(precision=10, scale=2), nullable=False)
+    precio = db.Column(db.Numeric(precision=10, scale=2), nullable=False)
+    url = db.Column(db.String(255), nullable=False)
+
+    compras = db.relationship('Compras', backref='stock', lazy=True, passive_deletes=True)
+    ventas = db.relationship('Ventas', backref='stock', lazy=True, passive_deletes=True)
+    ganancia_perdida = db.relationship('GananciaPerdidaMensual', backref='stock', uselist=False)
+    fotos = db.relationship('Fotos', backref='Stock', cascade="all, delete-orphan")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'titulo': self.titulo,
+            'nombre_link': self.nombre_link,
+            'descripcion': self.descripcion,
+            'tipo': self.tipo,
+            'cantidad': self.cantidad,
+            'precio_sin_descuento': float(self.precio_sin_descuento),
+            'precio': float(self.precio),
+            'fotos': [foto.to_dict() for foto in self.fotos],
+            'url': self.url
+        }
+    
+class Fotos(db.Model):
+    __tablename__ = 'fotos'
+    producto_id = db.Column(db.String(255), ForeignKey('stock.id'), nullable=False, primary_key=True)
+    src1 = db.Column(db.String(255), nullable=False)
+    srcset1 = db.Column(db.String(255), nullable=False)
+    src2 = db.Column(db.String(255), nullable=True)
+    srcset2 = db.Column(db.String(255), nullable=True)
+    src3 = db.Column(db.String(255), nullable=True)
+    srcset3 = db.Column(db.String(255), nullable=True)
+
+    def to_dict(self):
+        return {
+            'producto_id': self.producto_id,
+            'src1': self.src1,
+            'srcset1': self.srcset1,
+            'src2': self.src2,
+            'srcset2': self.srcset2,
+            'src3': self.src3,
+            'srcset3': self.srcset3
+        }
+
+class Compras(db.Model):
+    __tablename__ = 'compras'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id_stock = db.Column(db.String(255), db.ForeignKey('stock.id'), nullable=False)
+    fecha_hora = db.Column(db.TIMESTAMP, nullable=False, server_default=func.current_timestamp())
+    estado = db.Column(db.String(255), nullable=False)
+    cantidad = db.Column(db.Integer, nullable=False)
+    total = db.Column(db.Numeric(43, 2))
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'id_stock': self.id_stock,
+            'fecha_hora': self.fecha_hora.isoformat(),
+            'estado': self.estado,
+            'cantidad': self.cantidad,
+            'total': float(self.total)
+        }    
+
+class Ventas(db.Model):
+    __tablename__ = 'ventas'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id_stock = db.Column(db.String(255), db.ForeignKey('stock.id'), nullable=False)
+    fecha_hora = db.Column(db.TIMESTAMP, nullable=False, server_default=func.current_timestamp())
+    estado = db.Column(db.String(255), nullable=False)
+    cantidad = db.Column(db.Integer, nullable=False)
+    total = db.Column(db.Numeric(43, 2))
+
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'id_stock': self.id_stock,
+            'fecha_hora': self.fecha_hora.isoformat(),
+            'estado': self.estado,
+            'cantidad': self.cantidad,
+            'total': float(self.total)
+        }
+
+class GananciaPerdidaMensual(db.Model):
+    __tablename__ = 'ganancia_perdida_mensual'
+    fecha = db.Column(db.String(7), nullable=False, primary_key=True)
+    id_stock = db.Column(db.String(255), db.ForeignKey('stock.id', ondelete="CASCADE"), primary_key=True)
+    compra_cantidad_total = db.Column(db.Numeric(32, 0))
+    venta_cantidad_total = db.Column(db.Numeric(32, 0))
+    total_compras = db.Column(db.Numeric(42, 2))
+    total_ventas = db.Column(db.Numeric(42, 2))
+    total = db.Column(db.Numeric(43, 2))
+
+    def to_dict(self):
+        return {
+            'fecha': self.fecha,
+            'id_stock': self.id_stock,
+            'compra_cantidad_total': float(self.compra_cantidad_total),
+            'venta_cantidad_total': float(self.venta_cantidad_total),
+            'total_compras': float(self.total_compras),
+            'total_ventas': float(self.total_ventas),
+            'total': float(self.total)
+        }
 
 with open('anillos.json') as file:
     anillos = json.load(file)
@@ -154,7 +279,6 @@ def yape():
         'message': 'Se enviaron los correos electrónicos'
     })
 
-
 @app.route('/correo', methods=['POST'])
 def Correo():
     user = 'qillari120@gmail.com'
@@ -267,5 +391,336 @@ def obtener_collares(producto_id):
         return jsonify({"mensaje": "Producto no encontrado"}), 404
 
 
+
+
+@app.route("/login", methods=['GET'])
+def login():
+    username = request.json.get("username")
+    password = request.json.get("password")
+
+    if "Admin" == username or "admin" == username:
+        if password == "Fiorellaydiego1.":
+            return {
+                "success": True,
+                "message": "Usuario autenticado correctamente",
+                "id": 1,
+                "usuario": "invitado",
+                "token": 1,
+            }
+        else:
+            return {
+                "success": False,
+                "message": "Contraseña incorrecta"
+            }, 401
+    else:
+        return {
+            "success": False,
+            "message": "Usuario no encontrado"
+        }, 404
+
+@app.route("/panel-de-control", methods=['GET'])
+def panel_de_control():
+    try:
+        
+        top_5_vendidos = GananciaPerdidaMensual.query.order_by(GananciaPerdidaMensual.venta_cantidad_total.desc()).limit(5).all()
+        top_5_vendidos = [p.to_dict() for p in top_5_vendidos]
+
+        bottom_5_vendidos = GananciaPerdidaMensual.query.order_by(GananciaPerdidaMensual.venta_cantidad_total.asc()).limit(5).all()
+        bottom_5_vendidos = [p.to_dict() for p in bottom_5_vendidos]
+
+        top_5_ganancias = GananciaPerdidaMensual.query.order_by(GananciaPerdidaMensual.total_ventas.desc()).limit(5).all()
+        top_5_ganancias = [p.to_dict() for p in top_5_ganancias]
+
+        bottom_5_ganancias = GananciaPerdidaMensual.query.order_by(GananciaPerdidaMensual.total_ventas.asc()).limit(5).all()
+        bottom_5_ganancias = [p.to_dict() for p in bottom_5_ganancias]
+
+        total_sum = db.session.query(func.sum(GananciaPerdidaMensual.total)).scalar()
+
+        return jsonify({
+            'top_5_vendidos': top_5_vendidos,
+            'bottom_5_vendidos': bottom_5_vendidos,
+            'top_5_ganancias': top_5_ganancias,
+            'bottom_5_ganancias': bottom_5_ganancias,
+            'total_sum': float(total_sum) if total_sum else 0.0
+        }), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route("/crud-fotos", methods=['GET', 'POST', 'PUT', 'DELETE'])
+def crud_fotos():
+    try:
+        if request.method == 'GET':
+
+            data = request.args
+            cantidad = data.get("cantidad", 0)
+            fotos = Fotos.query.offset(cantidad).limit(20).all()
+            fotos_total = [s.to_dict() for s in fotos]
+            resultado = jsonify(fotos_total)
+            return (resultado), 200
+        
+        if request.method == 'POST':
+
+            data = request.get_json()
+
+            nuevo_stock = Fotos(
+                producto_id = data['producto_id'],
+                src1 = data['src1'],
+                srcset1 = data['srcset1'],
+                src2 = data['src2'],
+                srcset2 = data['srcset2'],
+                src3 = data['src3'],
+                srcset3 = data['srcset3'],
+            )
+
+            existing_stock = Stock.query.filter_by(id=data['id']).first()
+            if existing_stock:
+                return jsonify({'error': 'El producto ya existe'}), 400
+
+            db.session.add(nuevo_stock)
+            db.session.commit()
+            return jsonify({'mensaje': 'producto agregado correctamente'}), 201
+        
+        if request.method == 'PUT':
+
+            data = request.get_json()
+            id = data.get("id")
+            fotos = Fotos.query.filter_by(id=id).first()
+
+            if not fotos:
+                return jsonify({'error': 'Producto no encontrado'}), 404
+            
+            fotos.src1 = data.get("src1", fotos.src1)            
+            fotos.srcset1 = data.get("srcset1", fotos.srcset1)
+            fotos.src2 = data.get("src2", fotos.src2)
+            fotos.srcset2 = data.get("srcset2", fotos.srcset2)
+            fotos.src3 = data.get("src3", fotos.src3)
+            fotos.srcset3 = data.get("srcset3", fotos.srcset3)
+
+            db.session.commit()
+
+            return jsonify({'mensaje': 'Producto actualizado correctamente'}), 200
+        
+        if request.method == 'DELETE':
+
+            id = request.args.get("id")
+
+            fotos = Fotos.query.filter_by(id=id).first()
+
+            if not fotos:
+                return jsonify({'error': 'Producto no encontrado'}), 404
+            db.session.delete(fotos)
+            db.session.commit()
+            return jsonify({'mensaje': 'Producto eliminado correctamente'}), 204
+    
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error en la solicitud crud-fotos: {e}")
+
+        return jsonify({'error': str(e)}), 500
+
+@app.route("/crud-stock", methods=['GET', 'POST', 'PUT', 'DELETE'])
+def crud_stock():
+    try:
+        if request.method == 'GET':
+
+            data = request.args
+            cantidad = data.get("cantidad", 0)
+            stocks = Stock.query.all()
+            stock_total = [s.to_dict() for s in stocks]
+            resultado = jsonify(stock_total)
+            return (resultado), 200
+        
+        if request.method == 'POST':
+
+            data = request.get_json()
+
+            nuevo_stock = Stock(
+                id = data['id'],
+                titulo = data['titulo'],
+                nombre_link = data['nombre_link'],
+                descripcion = data['descripcion'],
+                tipo = data['tipo'],
+                cantidad = data['cantidad'],
+                precio_sin_descuento = data['precio_sin_descuento'],
+                precio = data['precio'],
+                url = data['url']
+            )
+
+            existing_stock = Stock.query.filter_by(id=data['id']).first()
+            if existing_stock:
+                return jsonify({'error': 'El producto ya existe'}), 400
+
+            db.session.add(nuevo_stock)
+            db.session.commit()
+            return jsonify({'mensaje': 'producto agregado correctamente'}), 201
+        
+        if request.method == 'PUT':
+
+            data = request.get_json()
+            id = data.get("id")
+            producto_stock = Stock.query.filter_by(id=id).first()
+
+            if not producto_stock:
+                return jsonify({'error': 'Producto no encontrado'}), 404
+            
+            producto_stock.titulo = data.get("titulo", producto_stock.titulo)            
+            producto_stock.nombre_link = data.get("nombre_link", producto_stock.nombre_link)
+            producto_stock.descripcion = data.get("descripcion", producto_stock.descripcion)
+            producto_stock.tipo = data.get("tipo", producto_stock.tipo)
+            producto_stock.cantidad = data.get("cantidad", producto_stock.cantidad)
+            producto_stock.precio_sin_descuento = data.get("precio_sin_descuento", producto_stock.precio_sin_descuento)
+            producto_stock.precio = data.get("precio", producto_stock.precio)
+            producto_stock.url = data.get("url", producto_stock.url)
+            db.session.commit()
+
+            return jsonify({'mensaje': 'Producto actualizado correctamente'}), 200
+        
+        if request.method == 'DELETE':
+
+            id = request.args.get("id")
+
+            producto_stock = Stock.query.filter_by(id=id).first()
+
+            if not producto_stock:
+                return jsonify({'error': 'Producto no encontrado'}), 404
+            db.session.delete(producto_stock)
+            db.session.commit()
+            return jsonify({'mensaje': 'Producto eliminado correctamente'}), 204
+    
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error en la solicitud GET /crud-stock: {e}")
+
+        return jsonify({'error': str(e)}), 500
+
+@app.route("/crud-ventas", methods=['GET','POST', 'PUT', 'DELETE'])
+def crud_ventas():
+    try:
+        if request.method == 'GET':
+
+            data = request.args
+            cantidad = data.get("cantidad", 0)
+            ventas = Ventas.query.offset(cantidad).limit(20).all()
+            return jsonify([v.to_dict() for v in ventas]), 200
+        
+        if request.method == 'POST':
+            id_stock = request.json.get("id_stock")
+            cantidad = request.json.get("cantidad")
+
+            stock_existente = Stock.query.filter_by(id=id_stock).first()
+            if not stock_existente:
+                return jsonify({'error': 'El producto especificado no existe'}), 404
+
+            nueva_venta = Ventas(
+                id_stock=id_stock,
+                cantidad=cantidad
+            )
+
+            db.session.add(nueva_venta)
+            db.session.commit()
+
+            return jsonify({'mensaje': 'Venta registrada correctamente'}), 201
+        
+        if request.method == 'PUT':
+
+            data = request.json
+            id = data.get("id")
+
+            venta_existente = Ventas.query.get(id)
+            if not venta_existente:
+                return jsonify({'error': 'La venta especificada no existe'}), 404
+
+            venta_existente.id_stock = data.get("id_stock", venta_existente.id_stock)
+            venta_existente.cantidad = data.get("cantidad", venta_existente.cantidad)
+
+            db.session.commit()
+
+            return jsonify({'mensaje': 'Venta actualizada correctamente'}), 200
+        
+        if request.method == 'DELETE':
+
+            id = request.json.get("id")
+
+            venta_stock = Ventas.query.filter_by(id=id).first()
+
+            if not venta_stock:
+                return jsonify({'error': 'No existe esta venta'}), 404
+            db.session.delete(venta_stock)
+            db.session.commit()
+            return jsonify({'mensaje': 'venta eliminado correctamente'}), 204
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@app.route("/crud-compras", methods=['GET','POST', 'PUT', 'DELETE'])
+def crud_compras():
+    try:
+        if request.method == 'GET':
+
+            data = request.get_json()
+            cantidad = data.get("cantidad", 0)
+            compras = Compras.query.offset(cantidad).limit(20).all()
+            return jsonify([c.to_dict() for c in compras]), 200
+        
+        if request.method == 'POST':
+            id_stock = request.json.get("id_stock")
+            cantidad = request.json.get("cantidad")
+
+            stock_existente = Stock.query.filter_by(id=id_stock).first()
+            if not stock_existente:
+                return jsonify({'error': 'El producto especificado no existe'}), 404
+
+            nueva_compra = Compras(
+                id_stock=id_stock,
+                cantidad=cantidad
+            )
+
+            db.session.add(nueva_compra)
+            db.session.commit()
+
+            return jsonify({'mensaje': 'Venta registrada correctamente'}), 201
+        
+        if request.method == 'PUT':
+
+            data = request.json
+            id = data.get("id")
+
+            compra_existente = Compras.query.get(id)
+            if not compra_existente:
+                return jsonify({'error': 'La compra especificada no existe'}), 404
+
+            compra_existente.id_stock = data.get("id_stock", compra_existente.id_stock)
+            compra_existente.cantidad = data.get("cantidad", compra_existente.cantidad)
+
+            db.session.commit()
+
+            return jsonify({'mensaje': 'Compra actualizada correctamente'}), 200
+        
+        if request.method == 'DELETE':
+
+            id = request.json.get("id")
+
+            compra_stock = Compras.query.filter_by(id=id).first()
+
+            if not compra_stock:
+                return jsonify({'error': 'No existe esta Compra'}), 404
+            db.session.delete(compra_stock)
+            db.session.commit()
+            return jsonify({'mensaje': 'Compra eliminado correctamente'}), 204
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@app.route("/ganancia-perdida", methods=['GET'])
+def ganancia_perdida():
+    data = request.args
+    cantidad = data.get("cantidad", 0)
+    stocks = GananciaPerdidaMensual.query.offset(cantidad).limit(20).all()
+    return jsonify([s.to_dict() for s in stocks]), 200
+
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(host='0.0.0.0', port=5000, debug=True)
