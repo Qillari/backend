@@ -17,8 +17,8 @@ import json
 import time
 
 app=Flask(__name__)
-CORS(app, origins=['https://front-end-qillari.vercel.app/', 'https://front-end-qillari.vercel.app', 'https://www.front-end-qillari.vercel.app/', 'https://www.qillari.vercel.app', "https://qillari.com/", "https://www.qillari.com/", "https://qillari.com", "https://www.qillari.com" ])
-#CORS(app, resources={r"/*": {"origins": "*"}})
+#CORS(app, origins=['https://front-end-qillari.vercel.app/', 'https://front-end-qillari.vercel.app', 'https://www.front-end-qillari.vercel.app/', 'https://www.qillari.vercel.app', "https://qillari.com/", "https://www.qillari.com/", "https://qillari.com", "https://www.qillari.com" ])
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 app.config['SECRET_KEY'] = "helloworld"
@@ -386,78 +386,6 @@ def panel_de_control():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route("/crud-fotos", methods=['GET', 'POST', 'PUT', 'DELETE'])
-def crud_fotos():
-    try:
-        if request.method == 'GET':
-
-            data = request.args
-            cantidad = data.get("cantidad", 0)
-            fotos = Fotos.query.offset(cantidad).limit(20).all()
-            fotos_total = [s.to_dict() for s in fotos]
-            resultado = jsonify(fotos_total)
-            return (resultado), 200
-        
-        if request.method == 'POST':
-
-            data = request.get_json()
-
-            nuevo_stock = Fotos(
-                producto_id = data['producto_id'],
-                src1 = data['src1'],
-                srcset1 = data['srcset1'],
-                src2 = data['src2'],
-                srcset2 = data['srcset2'],
-                src3 = data['src3'],
-                srcset3 = data['srcset3'],
-            )
-
-            existing_stock = Stock.query.filter_by(id=data['id']).first()
-            if existing_stock:
-                return jsonify({'error': 'El producto ya existe'}), 400
-
-            db.session.add(nuevo_stock)
-            db.session.commit()
-            return jsonify({'mensaje': 'producto agregado correctamente'}), 201
-        
-        if request.method == 'PUT':
-
-            data = request.get_json()
-            id = data.get("id")
-            fotos = Fotos.query.filter_by(id=id).first()
-
-            if not fotos:
-                return jsonify({'error': 'Producto no encontrado'}), 404
-            
-            fotos.src1 = data.get("src1", fotos.src1)            
-            fotos.srcset1 = data.get("srcset1", fotos.srcset1)
-            fotos.src2 = data.get("src2", fotos.src2)
-            fotos.srcset2 = data.get("srcset2", fotos.srcset2)
-            fotos.src3 = data.get("src3", fotos.src3)
-            fotos.srcset3 = data.get("srcset3", fotos.srcset3)
-
-            db.session.commit()
-
-            return jsonify({'mensaje': 'Producto actualizado correctamente'}), 200
-        
-        if request.method == 'DELETE':
-
-            id = request.args.get("id")
-
-            fotos = Fotos.query.filter_by(id=id).first()
-
-            if not fotos:
-                return jsonify({'error': 'Producto no encontrado'}), 404
-            db.session.delete(fotos)
-            db.session.commit()
-            return jsonify({'mensaje': 'Producto eliminado correctamente'}), 204
-    
-    except Exception as e:
-        db.session.rollback()
-        print(f"Error en la solicitud crud-fotos: {e}")
-
-        return jsonify({'error': str(e)}), 500
-
 @app.route("/crud-stock", methods=['GET'])
 def get_stock():
     try:
@@ -478,15 +406,7 @@ def get_stock():
 @app.route("/crud-stock", methods=['POST', 'PUT', 'DELETE'])
 def crud_stock():
     try:
-        if request.method == 'GET':
 
-            data = request.args
-            cantidad = data.get("cantidad", 0)
-            stocks = Stock.query.all()
-            stock_total = [s.to_dict() for s in stocks]
-            resultado = jsonify(stock_total)
-            return (resultado), 200
-        
         if request.method == 'POST':
 
             data = request.get_json()
@@ -500,7 +420,8 @@ def crud_stock():
                 cantidad = data['cantidad'],
                 precio_sin_descuento = data['precio_sin_descuento'],
                 precio = data['precio'],
-                url = data['url']
+                url = data['url'],
+                fotos = data['fotos']
             )
 
             existing_stock = Stock.query.filter_by(id=data['id']).first()
@@ -528,6 +449,7 @@ def crud_stock():
             producto_stock.precio_sin_descuento = data.get("precio_sin_descuento", producto_stock.precio_sin_descuento)
             producto_stock.precio = data.get("precio", producto_stock.precio)
             producto_stock.url = data.get("url", producto_stock.url)
+            producto_stock.fotos = data.get("fotos", producto_stock.fotos)
             db.session.commit()
 
             return jsonify({'mensaje': 'Producto actualizado correctamente'}), 200
