@@ -213,14 +213,9 @@ def venta_checkout():
         ganancia_perdida_encontrado = next((gp for gp in ganancias_perdidas if gp.id_stock == id), None)
         producto_stock = next((gp for gp in todos_los_producto if gp.id == id), None)
 
-        print("id",id)
-        print("ganancia", precio)
-        print("ganancia", cantidad)
-
         ganancia_perdida_encontrado.venta_cantidad_total += cantidad
         ganancia_perdida_encontrado.total_ventas += (cantidad * precio)
         producto_stock.cantidad -= cantidad
-
 
     db.session.commit()
 
