@@ -389,7 +389,7 @@ def login():
                 "message": "Usuario autenticado correctamente",
                 "id": 1,
                 "usuario": "invitado",
-                "token": 1,
+                "token": "m1c93nd0wmf38fje1",
             }
         else:
             return {
