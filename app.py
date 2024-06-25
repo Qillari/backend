@@ -17,7 +17,7 @@ import json
 import time
 
 app=Flask(__name__)
-CORS(app, origins=['https://front-end-qillari.vercel.app/', 'https://front-end-qillari.vercel.app', 'https://www.front-end-qillari.vercel.app/', 'https://www.qillari.vercel.app', "https://qillari.com/", "https://www.qillari.com/", "https://qillari.com", "https://www.qillari.com" ])
+CORS(app, origins=['https://front-end-three-navy.vercel.app/', 'https://front-end-three-navy.vercel.app', 'https://www.front-end-three-navy.vercel.app/', 'https://www.qillari.vercel.app', "https://qillari.com/", "https://www.qillari.com/", "https://qillari.com", "https://www.qillari.com" ])
 #CORS(app, resources={r"/*": {"origins": "*"}})
 
 
@@ -300,8 +300,6 @@ def Correo():
         smtp.login(user, app_password)
         smtp.sendmail(user, "qillari120@gmail.com", em1.as_string())
         smtp.sendmail(user, email, em2.as_string())
-
-    smtp.quit()
 
     return jsonify({
         'success': True,
