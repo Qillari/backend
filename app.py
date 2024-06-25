@@ -206,16 +206,16 @@ def venta_checkout():
     todos_los_producto = Stock.query.all()
 
     for productos in carrito:
-        id = productos.id
-        precio = productos.price
-        cantidad = productos.totalamount
+        id = productos.get('id')
+        precio = productos.get('price')
+        cantidad = productos.get('totalamount')
 
         ganancia_perdida_encontrado = next((gp for gp in ganancias_perdidas if gp.id_stock == id), None)
         producto_stock = next((gp for gp in todos_los_producto if gp.id == id), None)
 
-        print("id",productos.id)
-        print("ganancia", ganancia_perdida_encontrado)
-        print("ganancia", producto_stock)
+        print("id",id)
+        print("ganancia", precio)
+        print("ganancia", cantidad)
 
         ganancia_perdida_encontrado.venta_cantidad_total += cantidad
         ganancia_perdida_encontrado.total_ventas += (cantidad * precio)
