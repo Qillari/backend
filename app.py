@@ -9,6 +9,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.message import EmailMessage
 from email.mime.image import MIMEImage
+from datetime import datetime
 import ssl
 import smtplib
 import uuid
@@ -193,6 +194,9 @@ def venta_checkout():
     carrito = request.json.get("carrito")
     precio_total = request.json.get("precio_total")
     estado = "completado"
+    fecha_actual = datetime.now().date()
+    fecha_formateada = fecha_actual.strftime("%m-%Y")
+
 
     nueva_venta = Ventas(
         productos=carrito,
@@ -210,14 +214,24 @@ def venta_checkout():
         precio = productos.get('price')
         cantidad = productos.get('totalamount')
 
-        ganancia_perdida_encontrado = next((gp for gp in ganancias_perdidas if gp.id_stock == id), None)
+        ganancia_perdida_encontrado = next((gp for gp in ganancias_perdidas if gp.id_stock == id and gp.fecha == fecha_formateada), None)
         producto_stock = next((gp for gp in todos_los_producto if gp.id == id), None)
 
-        ganancia_perdida_encontrado.venta_cantidad_total += cantidad
-        ganancia_perdida_encontrado.total_ventas += (cantidad * precio)
+        if ganancia_perdida_encontrado:
+                ganancia_perdida_encontrado.venta_cantidad_total += cantidad
+                ganancia_perdida_encontrado.total_ventas += (cantidad * precio)
+        else:
+            ganancia_perdida_encontrado = GananciaPerdidaMensual(
+                id_stock=id,
+                fecha=fecha_actual,
+                venta_cantidad_total=cantidad,
+                total_ventas=cantidad * precio
+            )
+            db.session.add(ganancia_perdida_encontrado)
         producto_stock.cantidad -= cantidad
 
     db.session.commit()
+
 
 
     return jsonify({'mensaje': 'se actualizada correctamente'}), 200
