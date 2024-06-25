@@ -377,7 +377,7 @@ def correo_newsletter():
         'message': 'Se registro correctamente'
     })
 
-@app.route("/login", methods=['GET'])
+@app.route("/login", methods=['GET', 'POST'])
 def login():
     username = request.json.get("username")
     password = request.json.get("password")
