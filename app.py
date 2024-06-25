@@ -224,8 +224,11 @@ def venta_checkout():
             ganancia_perdida_encontrado = GananciaPerdidaMensual(
                 id_stock=id,
                 fecha=fecha_actual,
+                compra_cantidad_total = 0,
                 venta_cantidad_total=cantidad,
-                total_ventas=cantidad * precio
+                total_compras= 0,
+                total_ventas=cantidad * precio,
+                total = cantidad * precio
             )
             db.session.add(ganancia_perdida_encontrado)
         producto_stock.cantidad -= cantidad
@@ -541,24 +544,29 @@ def crud_ventas():
         if request.method == 'DELETE':
 
             id = request.json.get("id")
+            fecha_id = request.json.get("fecha")
 
             if not venta_stock:
                 return jsonify({'error': 'No existe esta venta'}), 404
             
             venta_stock = Ventas.query.filter_by(id=id).first()
             ganancias_perdidas = GananciaPerdidaMensual.query.all()
+            todos_los_producto = Stock.query.all()
 
             for producto in venta_stock.producto:
                 id_producto = producto['id']
                 precio = producto['price']
                 cantidad = producto['totalamount']
 
-                ganancia_perdida = next((gp for gp in ganancias_perdidas if gp.id_stock == id_producto), None)
+
+                ganancia_perdida = next((gp for gp in ganancias_perdidas if gp.id_producto == id and gp.fecha == fecha_id), None)
+                producto_stock = next((gp for gp in todos_los_producto if gp.id == id), None)
 
                 if ganancia_perdida:
-                    # Restar la cantidad de venta y el total de ventas
                     ganancia_perdida.venta_cantidad_total -= cantidad
                     ganancia_perdida.total_ventas -= (cantidad * precio)
+                    ganancia_perdida.total -= (cantidad * precio)
+                    producto_stock.cantidad += cantidad
 
             db.session.delete(venta_stock)
             db.session.commit()
