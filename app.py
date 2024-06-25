@@ -193,6 +193,10 @@ def checkout():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route('/venta-checkout', methods=['POST', 'GET'])
+def venta_checkout():
+    return None
+
 @app.route('/yape', methods=['POST'])
 def yape():
     user = 'qillari120@gmail.com'
