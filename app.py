@@ -164,7 +164,7 @@ def checkout():
         description1 = "joyas"
 
         # Realizar el pago utilizando los datos recibidos
-        sdk = mercadopago.SDK("APP_USR-1829594313616516-032020-b4250a856320c856072be653fa3f8821-1446480329")
+        sdk = mercadopago.SDK("TEST-1829594313616516-032020-52f09f4ab48888239c2f4bcf7659d244-1446480329")
 
         request_options = mercadopago.config.RequestOptions()
         request_options.custom_headers = {
@@ -387,6 +387,7 @@ def panel_de_control():
         return jsonify({'error': str(e)}), 500
 
 @app.route("/crud-stock", methods=['GET'])
+@cache.cached(timeout=60, query_string=True)
 def get_stock():
     try:
         data = request.args
