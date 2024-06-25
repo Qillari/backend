@@ -69,39 +69,35 @@ class Stock(db.Model):
 class Compras(db.Model):
     __tablename__ = 'compras'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    id_stock = db.Column(db.String(255), db.ForeignKey('stock.id'), nullable=False)
     fecha_hora = db.Column(db.TIMESTAMP, nullable=False, server_default=func.current_timestamp())
+    productos = db.Column(JSON, nullable=True)
     estado = db.Column(db.String(255), nullable=False)
-    cantidad = db.Column(db.Integer, nullable=False)
     total = db.Column(db.Numeric(43, 2))
 
     def to_dict(self):
         return {
             'id': self.id,
-            'id_stock': self.id_stock,
             'fecha_hora': self.fecha_hora.isoformat(),
+            'productos': self.productos,
             'estado': self.estado,
-            'cantidad': self.cantidad,
             'total': float(self.total)
         }    
 
 class Ventas(db.Model):
     __tablename__ = 'ventas'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    id_stock = db.Column(db.String(255), db.ForeignKey('stock.id'), nullable=False)
     fecha_hora = db.Column(db.TIMESTAMP, nullable=False, server_default=func.current_timestamp())
+    productos = db.Column(JSON, nullable=True)
     estado = db.Column(db.String(255), nullable=False)
-    cantidad = db.Column(db.Integer, nullable=False)
     total = db.Column(db.Numeric(43, 2))
 
 
     def to_dict(self):
         return {
             'id': self.id,
-            'id_stock': self.id_stock,
             'fecha_hora': self.fecha_hora.isoformat(),
+            'productos': self.productos,
             'estado': self.estado,
-            'cantidad': self.cantidad,
             'total': float(self.total)
         }
 
@@ -195,7 +191,35 @@ def checkout():
 
 @app.route('/venta-checkout', methods=['POST', 'GET'])
 def venta_checkout():
-    return None
+    carrito = request.json.get("carrito")
+    precio_total = request.json.get("precio_total")
+
+    nueva_venta = Ventas(
+        producto=carrito,
+        total=precio_total
+    )
+
+    db.session.add(nueva_venta)
+    
+    ganancias_perdidas = GananciaPerdidaMensual.query.all()
+    todos_los_producto = Stock.query.all()
+
+    for productos in carrito:
+        id = productos.get('id')
+        precio = productos.get('price')
+        cantidad = productos.get('totalamount')
+
+        ganancia_perdida_encontrado = next((gp for gp in ganancias_perdidas if gp.id_stock == id), None)
+        producto_stock = next((gp for gp in todos_los_producto if gp.id == id), None)
+
+        ganancia_perdida_encontrado.venta_cantidad_total += cantidad
+        ganancia_perdida_encontrado.total_ventas += (cantidad * precio)
+        producto_stock.cantidad -= cantidad
+
+    db.session.commit()
+
+
+    return jsonify({'mensaje': 'se actualizada correctamente'}), 200
 
 @app.route('/yape', methods=['POST'])
 def yape():
@@ -489,10 +513,6 @@ def crud_ventas():
             id_stock = request.json.get("id_stock")
             cantidad = request.json.get("cantidad")
 
-            stock_existente = Stock.query.filter_by(id=id_stock).first()
-            if not stock_existente:
-                return jsonify({'error': 'El producto especificado no existe'}), 404
-
             nueva_venta = Ventas(
                 id_stock=id_stock,
                 cantidad=cantidad
@@ -503,32 +523,21 @@ def crud_ventas():
 
             return jsonify({'mensaje': 'Venta registrada correctamente'}), 201
         
-        if request.method == 'PUT':
-
-            data = request.json
-            id = data.get("id")
-
-            venta_existente = Ventas.query.get(id)
-            if not venta_existente:
-                return jsonify({'error': 'La venta especificada no existe'}), 404
-
-            venta_existente.id_stock = data.get("id_stock", venta_existente.id_stock)
-            venta_existente.cantidad = data.get("cantidad", venta_existente.cantidad)
-
-            db.session.commit()
-
-            return jsonify({'mensaje': 'Venta actualizada correctamente'}), 200
-        
         if request.method == 'DELETE':
 
             id = request.json.get("id")
 
             venta_stock = Ventas.query.filter_by(id=id).first()
-
+            
             if not venta_stock:
                 return jsonify({'error': 'No existe esta venta'}), 404
+            
+            for productos in venta_stock:
+                productos
+
             db.session.delete(venta_stock)
             db.session.commit()
+
             return jsonify({'mensaje': 'venta eliminado correctamente'}), 204
         
     except Exception as e:
