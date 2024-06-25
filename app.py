@@ -192,10 +192,12 @@ def checkout():
 def venta_checkout():
     carrito = request.json.get("carrito")
     precio_total = request.json.get("precio_total")
+    estado = "completado"
 
     nueva_venta = Ventas(
-        producto=carrito,
-        total=precio_total
+        productos=carrito,
+        total=precio_total,
+        estado=estado
     )
 
     db.session.add(nueva_venta)
