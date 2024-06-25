@@ -526,13 +526,23 @@ def crud_ventas():
 
             id = request.json.get("id")
 
-            venta_stock = Ventas.query.filter_by(id=id).first()
-            
             if not venta_stock:
                 return jsonify({'error': 'No existe esta venta'}), 404
             
-            for productos in venta_stock:
-                productos
+            venta_stock = Ventas.query.filter_by(id=id).first()
+            ganancias_perdidas = GananciaPerdidaMensual.query.all()
+
+            for producto in venta_stock.producto:
+                id_producto = producto['id']
+                precio = producto['price']
+                cantidad = producto['totalamount']
+
+                ganancia_perdida = next((gp for gp in ganancias_perdidas if gp.id_stock == id_producto), None)
+
+                if ganancia_perdida:
+                    # Restar la cantidad de venta y el total de ventas
+                    ganancia_perdida.venta_cantidad_total -= cantidad
+                    ganancia_perdida.total_ventas -= (cantidad * precio)
 
             db.session.delete(venta_stock)
             db.session.commit()
