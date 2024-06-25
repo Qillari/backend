@@ -48,8 +48,7 @@ class Stock(db.Model):
     url = db.Column(db.String(255), nullable=False)
     fotos = db.Column(JSON, nullable=True)
 
-    compras = db.relationship('Compras', backref='stock', lazy=True, passive_deletes=True)
-    ventas = db.relationship('Ventas', backref='stock', lazy=True, passive_deletes=True)
+
     ganancia_perdida = db.relationship('GananciaPerdidaMensual', backref='stock', uselist=False)
 
     def to_dict(self):
